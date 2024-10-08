@@ -1,4 +1,4 @@
-# .Github
+# .github
 
 The special repository for providing community health documentation used within the Galaxy.
 
