@@ -1,8 +1,8 @@
-# Welcome to The Holocron 🧑‍💻✨
+# ✨ Welcome to The Holocron ✨
 
 Holocrons are ancient artifacts that safeguard the knowledge of the Force, used by the wise to preserve vital, sensitive information. Here at The Holocron, we bring the same level of care and diligence to our code as the gatekeepers of these sacred repositories. We believe that every line of code should be meaningful, methodically crafted, and preserved for future generations of developers.
 
-<!-- @TODO: add image -->
+![the-holocron-logo-v2](https://github.com/user-attachments/assets/425d2771-c8fd-46b6-acd1-826316ca7ed4)
 
 ## 🚀 Our Mission
 
