@@ -1,0 +1,36 @@
+name: Support Request
+description: Ask a question about this project
+title: "(feat): "
+labels: ["feature", "triage"]
+assignees:
+  - iamnewton
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: how-can-we-help
+    attributes:
+      label: How can we help you?
+      description: Provide details for how we can support you.
+    validations:
+      required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other information you think is important
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](../CODE_OF_CONDUCT.md).
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
+  - type: markdown
+    attributes:
+      value: "Thanks for completing the form!"
