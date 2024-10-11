@@ -1,0 +1,13 @@
+{
+  "name": "Release",
+  "description": "Create a semantically-versioned release, with a changelog and publish it to NPM",
+  "iconName": "octicon package",
+  "categories": [
+    "npm",
+    "changeset",
+    "deployment"
+  ],
+  "filePatterns": [
+    "package.json$"
+  ]
+}

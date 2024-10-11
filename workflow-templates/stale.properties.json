@@ -1,0 +1,5 @@
+{
+  "name": "Stale",
+  "description": "Mark stale issues and pull requests",
+  "iconName": "octicon squirrel"
+}
