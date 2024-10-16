@@ -10,7 +10,7 @@ We aim to create an open-source ecosystem where code is not just written but che
 
 ## 📚 Contribution Guidelines
 
-Our community is open to all developers who wish to contribute to our growing body of knowledge. Check out our [contribution guidelines](https://github.com/theholocron/.github/blob/main/CONTRIBUTING.md) to get started. We value thoughtful code reviews, well-documented commits, and collaboration.
+Our community is open to all developers who wish to contribute to our growing body of knowledge. Check out our [contribution guidelines](https://docs.theholocron.dev/contributing/) to get started. We value thoughtful code reviews, well-documented commits, and collaboration.
 
 ## 🌟 Resources
 
@@ -18,7 +18,7 @@ Find all our docs and guidelines in [The Holocron Archives](https://docs.theholo
 
 ## 🔧 Current Projects
 
-We’re working on a number of open-source configurations, libraries, and tools designed to help developers streamline their workflow and maintain high-quality code.
+We’re working on a number of [open-source configurations](https://github.com/theholocron/configs), libraries, and tools designed to help developers streamline their workflow and maintain high-quality code.
 
 <!-- @TODO: add in public OSS projects -->
 
