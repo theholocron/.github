@@ -1,6 +1,8 @@
 name: Greetings
 
-on: [pull_request, issues]
+on: # yamllint disable-line rule:truthy
+  - pull_request
+  - issues
 
 jobs:
   greeting:

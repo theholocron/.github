@@ -1,0 +1,5 @@
+{
+  "name": "Audit",
+  "description": "Check the repository meets the organizations standards.",
+  "iconName": "octicon checklist"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "Review",
+  "description": "Use ReviewDog to comment on PRs.",
+  "iconName": "octicon code-review"
+}

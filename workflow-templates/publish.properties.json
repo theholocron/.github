@@ -1,0 +1,5 @@
+{
+  "name": "Publish",
+  "description": "Deploy versioned changes to NPM and GitHub Packages.",
+  "iconName": "octicon package"
+}

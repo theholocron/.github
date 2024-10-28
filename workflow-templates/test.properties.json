@@ -1,0 +1,5 @@
+{
+  "name": "Test",
+  "description": "Run a suite of tests to verify code quality.",
+  "iconName": "octicon beaker"
+}
