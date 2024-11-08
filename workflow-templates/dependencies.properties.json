@@ -1,0 +1,5 @@
+{
+  "name": "Dependencies",
+  "description": "Update dependencies using Dependabot",
+  "iconName": "octicon dependabot"
+}
