@@ -26,6 +26,8 @@ jobs:
 
       - run: npm ci
         name: Install dependencies
+        env:
+          HUSKY: 0
 
       - run: npm publish
         name: Publish to NPM
@@ -49,6 +51,8 @@ jobs:
 
       - run: npm ci
         name: Install dependencies
+        env:
+          HUSKY: 0
 
       - run: npm publish --access public
         name: Publish to GitHub Packages
