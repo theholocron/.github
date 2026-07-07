@@ -1,4 +1,4 @@
-name: Review (reusable)
+name: Review
 
 # ReviewDog is the annotation layer — runs linters and posts inline PR diff
 # annotations. Runs on pull_request only (annotation reporters require PR context).

@@ -1,4 +1,4 @@
-name: PR Bookkeeping (reusable)
+name: PR Bookkeeping
 
 on:
   workflow_call:

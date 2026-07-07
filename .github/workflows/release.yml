@@ -1,4 +1,4 @@
-name: Release (reusable)
+name: Release
 
 # Semantic-release with OIDC Trusted Publishing — no NPM_TOKEN required.
 # The calling repo must have a .releaserc.json that configures branches,

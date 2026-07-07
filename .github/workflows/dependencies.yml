@@ -1,4 +1,4 @@
-name: Dependencies (reusable)
+name: Dependencies
 
 on:
   workflow_call:

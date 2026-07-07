@@ -1,4 +1,4 @@
-name: Stale (reusable)
+name: Stale
 
 on:
   workflow_call:

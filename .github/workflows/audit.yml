@@ -1,4 +1,4 @@
-name: Audit (reusable)
+name: Audit
 
 on:
   workflow_call:
