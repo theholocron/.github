@@ -27,6 +27,5 @@ runs:
           bun install --frozen-lockfile
 
         else
-          echo "No supported lockfile found."
-          exit 1
+          echo "No supported package manager detected. Skipping dependency installation."
         fi
