@@ -1,0 +1,5 @@
+{
+  "name": "Typecheck",
+  "description": "Run tsc --noEmit to catch TypeScript type errors.",
+  "iconName": "octicon code"
+}
