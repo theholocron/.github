@@ -1,60 +1,17 @@
-name: Publish
+name: Release
 
-on: # yamllint disable-line rule:truthy
-  release:
-    types:
-      - published
+on:
+  push:
+    branches:
+      - main
 
 permissions:
-  contents: read
-  packages: write
+  contents: write
+  id-token: write
+  issues: write
+  pull-requests: write
 
 jobs:
-  publish-npm:
-    name: Publish to NPM
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        name: Checkout repository
-
-      - uses: actions/setup-node@v4
-        name: Setup Node.js @v20
-        with:
-          cache: npm
-          node-version: 20.x
-          registry-url: 'https://registry.npmjs.org'
-
-      - run: npm ci
-        name: Install dependencies
-        env:
-          HUSKY: 0
-
-      - run: npm publish
-        name: Publish to NPM
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
-  publish-gh:
-    name: Publish to GitHub
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        name: Checkout repository
-
-      - uses: actions/setup-node@v4
-        name: Setup Node.js @v20
-        with:
-          cache: npm
-          node-version: 20.x
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@theholocron'
-
-      - run: npm ci
-        name: Install dependencies
-        env:
-          HUSKY: 0
-
-      - run: npm publish --access public
-        name: Publish to GitHub Packages
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  release:
+    uses: theholocron/.github/.github/workflows/release.yml@main
+    secrets: inherit
