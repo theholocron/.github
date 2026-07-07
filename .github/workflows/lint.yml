@@ -76,7 +76,7 @@ jobs:
 
       - uses: crazy-max/ghaction-import-gpg@v6
         name: Import GPG Key
-        if: ${{ inputs.enable-auto-commit == true }}
+        if: ${{ inputs.enable-auto-commit == true && github.event.pull_request != null }}
         with:
           git_user_signingkey: true
           git_commit_gpgsign: true
