@@ -1,5 +1,5 @@
-name: Setup Node
-description: Install Node.js and pnpm with dependency caching.
+name: Setup
+description: Prepare the environment and install project dependencies.
 
 inputs:
   node-version:
@@ -16,11 +16,9 @@ runs:
   using: composite
 
   steps:
-    - uses: pnpm/action-setup@v4
-      with:
-        version: ${{ inputs.pnpm-version }}
-
-    - uses: actions/setup-node@v4
+    - uses: ./.github/actions/setup-node
       with:
         node-version: ${{ inputs.node-version }}
-        cache: pnpm
+        pnpm-version: ${{ inputs.pnpm-version }}
+
+    - uses: ./.github/actions/install
