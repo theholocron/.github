@@ -1,0 +1,14 @@
+{
+  "project": {
+    "name": ".github",
+    "description": "Org-level community health files, reusable CI workflows, and workflow templates for theholocron.",
+    "repo": "theholocron/.github",
+    "repoPolicy": {
+      "preset": "balanced"
+    }
+  },
+  "providers": {
+    "vault": ["doppler", { "project": "theholocron", "config": "dev" }],
+    "source": "github"
+  }
+}
