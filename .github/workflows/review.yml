@@ -3,6 +3,8 @@ name: Review
 # ReviewDog is the annotation layer — runs linters and posts inline PR diff
 # annotations. Runs on pull_request only (annotation reporters require PR context).
 # super-linter (lint.yml) is the CI gate that runs on push + PR.
+# Gitleaks and YAML are intentionally duplicated here: super-linter catches
+# them as CI failures, ReviewDog surfaces them as inline diff annotations.
 
 on:
   workflow_call:
@@ -26,6 +28,16 @@ jobs:
         name: Install ReviewDog
         with:
           reviewdog_version: latest
+
+      - uses: reviewdog/action-gitleaks@v1
+        name: Gitleaks (secrets)
+        with:
+          reporter: github-pr-check
+
+      - uses: reviewdog/action-yamllint@v1
+        name: YamlLint
+        with:
+          reporter: github-pr-check
 
       - uses: reviewdog/action-eslint@v1
         name: ESLint
