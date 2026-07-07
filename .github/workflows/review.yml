@@ -1,72 +1,66 @@
-name: Review
+name: Review (reusable)
 
-on: # yamllint disable-line rule:truthy
-  - push
-  - pull_request
+# ReviewDog is the annotation layer — runs linters and posts inline PR diff
+# annotations. Runs on pull_request only (annotation reporters require PR context).
+# super-linter (lint.yml) is the CI gate that runs on push + PR.
+
+on:
+  workflow_call:
 
 jobs:
   reviewdog:
     name: Review PRs
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         name: Checkout repository
 
-      # - uses: actions/setup-node@v4
-      #   name: Setup Node.js @v20
-      #   with:
-      #     cache: npm
-      #     node-version: 20.x
+      - uses: theholocron/.github/.github/actions/setup@main
+        name: Setup
 
-      # - run: npm ci
-      #   name: Install dependencies
+      - uses: reviewdog/action-setup@v1
+        name: Install ReviewDog
+        with:
+          reviewdog_version: latest
 
-      # - uses: reviewdog/action-setup@v1
-      #   name: Install & setup ReviewDog
-      #   with:
-      #     reviewdog_version: latest # Optional. [latest,nightly,v.X.Y.Z]
+      - uses: reviewdog/action-eslint@v1
+        name: ESLint
+        with:
+          reporter: github-pr-check
+          eslint_flags: "."
 
-      - uses: reviewdog/action-gitleaks@v1
-        name: Detect secrets using Gitleaks
+      - uses: EPMatt/reviewdog-action-tsc@v1
+        name: TypeScript
         with:
           reporter: github-pr-check
 
-      - uses: reviewdog/action-alex@v1
-        name: Check language using Alex
+      - uses: reviewdog/action-shellcheck@v1
+        name: ShellCheck
         with:
-          reporter: github-pr-check # [github-pr-check,github-check,github-pr-review]
-          # GitHub Status Check won't become failure with warning.
-          # level: warning # [info,warning, error]
+          reporter: github-pr-check
+          fail_level: none
 
-      # - uses: EPMatt/reviewdog-action-tsc@v1
-      #   name: Check types using TypeScript
-      #   with:
-      #     reporter: github-pr-check
-
-      # - uses: reviewdog/action-stylelint@v1
-      #   name: Check CSS using StyleLint
-      #   with:
-      #     reporter: github-pr-check
-      #     stylelint_input: '**/*.css'
-
-      # need to setup textlint in the repo for this
-      # - uses: tsuyoshicho/action-textlint@v3
-      #   name: Check text using TextLint
-      #   with:
-      #     reporter: github-pr-check
+      - uses: reviewdog/action-hadolint@v1
+        name: Hadolint (Dockerfile)
+        with:
+          reporter: github-pr-check
+          fail_level: none
 
       - uses: reviewdog/action-actionlint@v1
-        name: Check GitHub Actions using ActionLint
+        name: ActionLint (GitHub Actions)
         with:
           reporter: github-pr-check
 
-      # - uses: dotenv-linter/action-dotenv-linter@v2
-      #   name: Check environment variables using dotenv
-      #   with:
-      #     reporter: github-code-suggestions
+      - uses: dotenv-linter/action-dotenv-linter@v2
+        name: dotenv-linter
+        with:
+          reporter: github-code-suggestions
 
-      - uses: reviewdog/action-yamllint@v1
-        name: Check YAML using YamlLint
+      - uses: reviewdog/action-alex@v1
+        name: Alex (inclusive language)
         with:
           reporter: github-pr-check
-          yamllint_flags: "-c ${{ github.workspace }}/yamllint.config.yml ${{ github.workspace }}"
