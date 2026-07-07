@@ -16,6 +16,9 @@ jobs:
         name: Greet on first contribution
         with:
           script: |
+            // Only greet on the initial open — ignore synchronize, reopened, etc.
+            if (context.payload.action !== 'opened') return;
+
             const actor = context.actor;
             const { owner, repo } = context.repo;
 
