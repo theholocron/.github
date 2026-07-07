@@ -23,17 +23,21 @@ jobs:
             // whether this is an issue vs. PR event — works regardless of how GitHub
             // propagates event names through workflow_call chains.
             const isIssue = !!context.payload.issue && !context.payload.pull_request;
-            const type = isIssue ? 'issue' : 'pr';
-
-            // Use the search API to count issues and PRs independently — listForRepo
-            // returns both mixed together since GitHub treats PRs as issues, which
-            // would incorrectly count a user's first PR when checking for first issue.
-            const { data } = await github.rest.search.issuesAndPullRequests({
-              q: `repo:${owner}/${repo} author:${actor} is:${type}`,
-              per_page: 2
+            // listForRepo returns both issues and PRs (GitHub treats PRs as issues),
+            // sorted newest-first. Filter by type to track first-issue and first-PR
+            // independently, and avoid search-index eventual-consistency lag.
+            const { data: recent } = await github.rest.issues.listForRepo({
+              owner, repo,
+              creator: actor,
+              state: 'all',
+              per_page: 50
             });
 
-            if (data.total_count !== 1) return;
+            const sameType = recent.filter(item =>
+              isIssue ? !item.pull_request : !!item.pull_request
+            );
+
+            if (sameType.length !== 1) return;
             const body = isIssue
               ? `Hey @${actor}!\n\nWe really appreciate you taking the time to report an issue. The collaborators on this project attempt to help as many people as possible, but we are a limited number of volunteers, so it is possible that this will not be addressed as swiftly.\n\nYour patience is much appreciated and we will get back to you as quickly as possible.`
               : `Hey @${actor}!\n\nWe really appreciate you taking the time to help out with this PR. The collaborators on this project attempt to help as many people as possible, but we are a limited number of volunteers, so it is possible that this will not be addressed as swiftly.\n\nYour patience is much appreciated and we will get back to you as quickly as possible.`;
