@@ -29,7 +29,9 @@ jobs:
 
             if (prior.length !== 1) return;
 
-            const isIssue = context.eventName === 'issues';
+            // context.eventName is always 'workflow_call' in reusable workflows —
+            // inspect the payload structure instead to detect the original event type.
+            const isIssue = !!context.payload.issue && !context.payload.pull_request;
             const body = isIssue
               ? `Hey @${actor}!\n\nWe really appreciate you taking the time to report an issue. The collaborators on this project attempt to help as many people as possible, but we are a limited number of volunteers, so it is possible that this will not be addressed as swiftly.\n\nYour patience is much appreciated and we will get back to you as quickly as possible.`
               : `Hey @${actor}!\n\nWe really appreciate you taking the time to help out with this PR. The collaborators on this project attempt to help as many people as possible, but we are a limited number of volunteers, so it is possible that this will not be addressed as swiftly.\n\nYour patience is much appreciated and we will get back to you as quickly as possible.`;

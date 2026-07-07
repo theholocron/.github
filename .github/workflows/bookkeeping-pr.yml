@@ -24,3 +24,4 @@ jobs:
           include-body: 0
           sync-labels: 1
           enable-versioned-regex: 0
+          repo-token: ${{ github.token }}

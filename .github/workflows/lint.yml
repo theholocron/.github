@@ -3,14 +3,6 @@ name: Lint
 on:
   workflow_call:
     inputs:
-      eslint-config-file:
-        type: string
-        required: false
-        default: eslint.config.js
-      typescript-tsconfig-file:
-        type: string
-        required: false
-        default: tsconfig.json
       prettier-config:
         type: string
         required: false
@@ -64,10 +56,7 @@ jobs:
           FIX_MARKDOWN_PRETTIER: true
           FIX_TSX: true
           FIX_TYPESCRIPT_PRETTIER: true
-          JAVASCRIPT_ES_CONFIG_FILE: ${{ inputs.eslint-config-file }}
           PRETTIER_CONFIG: ${{ inputs.prettier-config }}
-          TYPESCRIPT_ES_CONFIG_FILE: ${{ inputs.eslint-config-file }}
-          TYPESCRIPT_STANDARD_TSCONFIG_FILE: ${{ inputs.typescript-tsconfig-file }}
           VALIDATE_DOCKERFILE: true
           VALIDATE_EDITORCONFIG: true
           VALIDATE_ENV: true
