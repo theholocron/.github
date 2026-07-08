@@ -1,25 +1,26 @@
 ---
 # Conventional Commits title matching (include-title: 1 in bookkeeping-pr.yml)
+# Patterns use [:(] to match exactly — ^fix alone would match "fixture", "fixing", etc.
 chore:
-  - "^chore"
+  - "^chore[:(]"
 
 ci:
-  - "^ci"
+  - "^ci[:(]"
 
 documentation:
-  - "^docs"
+  - "^docs[:(]"
 
 bug:
-  - "^fix"
+  - "^fix[:(]"
 
 enhancement:
-  - "^feat"
+  - "^feat[:(]"
 
 refactor:
-  - "^refactor"
+  - "^refactor[:(]"
 
 performance:
-  - "^perf"
+  - "^perf[:(]"
 
 test:
-  - "^test"
+  - "^test[:(]"
