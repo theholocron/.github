@@ -8,7 +8,6 @@
     }
   },
   "providers": {
-    "vault": ["doppler", { "project": "theholocron", "config": "dev" }],
     "source": "github"
   }
 }
