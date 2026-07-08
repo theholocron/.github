@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/workflows/stale.yml
-# Synced:  2026-07-08T02:54:34.963Z
+# Synced:  2026-07-08T03:22:11.367Z
 # Tool:    scripts/sync-github.mts
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Stale

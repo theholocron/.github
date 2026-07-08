@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/workflows/review.yml
-# Synced:  2026-07-08T02:54:34.963Z
+# Synced:  2026-07-08T03:22:11.367Z
 # Tool:    scripts/sync-github.mts
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Review
@@ -22,7 +22,7 @@ jobs:
   reviewdog:
     name: Review PRs
     runs-on: ubuntu-latest
-
+    timeout-minutes: 20
     permissions:
       contents: read
       checks: write
@@ -41,7 +41,7 @@ jobs:
           else
             echo "enabled=false" >> "$GITHUB_OUTPUT"
           fi
-      
+
       - name: Setup Node
         if: steps.node.outputs.enabled == 'true'
         uses: theholocron/.github/.github/actions/setup-node@main
@@ -49,7 +49,7 @@ jobs:
       - name: Install dependencies
         if: steps.node.outputs.enabled == 'true'
         uses: theholocron/.github/.github/actions/install@main
-      
+
       - name: Install ReviewDog
         uses: reviewdog/action-setup@v1
         with:
@@ -72,7 +72,7 @@ jobs:
             ${{ hashFiles('yamllint.config.yml') != ''
                 && format('-c {0}/yamllint.config.yml {0}', github.workspace)
                 || github.workspace }}
-          
+
       - name: ActionLint (GitHub Actions)
         if: ${{ hashFiles('.github/workflows/*.yml', '.github/workflows/*.yaml') != '' }}
         uses: reviewdog/action-actionlint@v1
