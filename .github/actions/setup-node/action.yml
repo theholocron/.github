@@ -1,3 +1,8 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/cli/src/templates/actions/setup-node/action.yml
+# Synced:  2026-07-08T02:38:45.486Z
+# Tool:    scripts/sync-github.mts
+# Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Setup Node
 description: >
   Install Node.js with the correct package manager cache. Detects the
@@ -23,6 +28,7 @@ runs:
       id: pm
       shell: bash
       run: |
+        set -euo pipefail
         if [[ -f pnpm-lock.yaml ]]; then
           echo "name=pnpm"  >> "$GITHUB_OUTPUT"
           echo "cache=pnpm" >> "$GITHUB_OUTPUT"

@@ -1,3 +1,8 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/cli/src/templates/actions/install/action.yml
+# Synced:  2026-07-08T02:38:45.486Z
+# Tool:    scripts/sync-github.mts
+# Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Install dependencies
 description: Install project dependencies using the detected package manager.
 

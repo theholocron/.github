@@ -1,3 +1,8 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/cli/src/templates/workflows/release.yml
+# Synced:  2026-07-08T02:38:45.486Z
+# Tool:    scripts/sync-github.mts
+# Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Release
 
 # Semantic-release with OIDC Trusted Publishing — no NPM_TOKEN required.
@@ -22,12 +27,17 @@ jobs:
       issues: write
       pull-requests: write
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # Do not cancel in-progress releases — a partial release is worse than a slow one.
+    concurrency:
+      group: release-${{ github.ref }}
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
         name: Checkout repository
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
 
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
@@ -42,5 +52,5 @@ jobs:
       - run: npx semantic-release
         name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           NPM_CONFIG_PROVENANCE: true

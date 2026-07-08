@@ -1,3 +1,8 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/cli/src/templates/workflows/bookkeeping-pr.yml
+# Synced:  2026-07-08T02:38:45.486Z
+# Tool:    scripts/sync-github.mts
+# Changes: edit source in theholocron/holocron and push to alpha or main.
 name: PR Bookkeeping
 
 on:
@@ -16,6 +21,10 @@ jobs:
       contents: read
       pull-requests: write
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    concurrency:
+      group: bookkeeping-pr-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
     steps:
       - uses: github/issue-labeler@v3.4
         with:
