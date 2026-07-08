@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/workflows/lint.yml
-# Synced:  2026-07-08T19:18:56.879Z
+# Synced:  2026-07-08T19:30:52.886Z
 # Tool:    scripts/sync-github.mts
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Lint
