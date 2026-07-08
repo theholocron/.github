@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup
         if: ${{ hashFiles('pnpm-lock.yaml') != '' }}
@@ -131,7 +131,7 @@ jobs:
 
       - name: dotenv-linter
         if: ${{ hashFiles('**/.env*') != '' }}
-        uses: dotenv-linter/action-dotenv-linter@v2
+        uses: dotenv-linter/action-dotenv-linter@v3
         with:
           reporter: github-code-suggestions
 

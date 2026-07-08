@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         name: Checkout repository
         with:
           fetch-depth: 0
@@ -30,7 +30,7 @@ jobs:
       - run: pnpm test -- --coverage
         name: Run tests with coverage
 
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@v7
         name: Upload results to Codecov
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

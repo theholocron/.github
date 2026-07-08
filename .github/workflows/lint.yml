@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         name: Checkout repository
         with:
           fetch-depth: 0
@@ -45,7 +45,7 @@ jobs:
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
 
-      - uses: super-linter/super-linter/slim@v7.1.0
+      - uses: super-linter/super-linter/slim@v8.7.0
         name: Run Super Linter
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -80,7 +80,7 @@ jobs:
           VALIDATE_YAML: true
           YAML_CONFIG_FILE: ${{ inputs.yaml-config }}
 
-      - uses: crazy-max/ghaction-import-gpg@v6
+      - uses: crazy-max/ghaction-import-gpg@v7
         name: Import GPG Key
         # Conditions mirror auto-commit exactly — no point importing GPG if the
         # commit step will be skipped (fork PR, default branch, or secret unset).
@@ -96,7 +96,7 @@ jobs:
           GPG_PRIVATE_KEY: ${{ secrets.SUPER_LINTER_GPG_PRIVATE_KEY }}
           PASSPHRASE: ${{ secrets.SUPER_LINTER_GPG_PASSPHRASE }}
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@v7
         name: Commit and push linting fixes
         if: >
           inputs.enable-auto-commit == true &&
