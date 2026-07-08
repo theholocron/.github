@@ -1,12 +1,13 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/commands/setup-workflows.ts
-# Synced:  2026-07-08T17:43:02.701Z
+# Synced:  2026-07-08T17:54:47.218Z
 # Tool:    scripts/sync-github.mts
 # Changes: edit setup-workflows.ts in theholocron/holocron and push.
 name: Typecheck
 
 on: # yamllint disable-line rule:truthy
   push:
+    branches: [main, alpha]
   pull_request:
 
 concurrency:
@@ -18,5 +19,6 @@ permissions:
 
 jobs:
   typecheck:
+    name: Typecheck
     uses: theholocron/.github/.github/workflows/typecheck.yml@main
     secrets: inherit
