@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/commands/setup-workflows.ts
-# Synced:  2026-07-08T18:58:21.598Z
+# Synced:  2026-07-08T19:18:56.879Z
 # Tool:    scripts/sync-github.mts
 # Changes: edit setup-workflows.ts in theholocron/holocron and push.
 name: Typecheck
