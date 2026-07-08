@@ -1,12 +1,18 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/workflows/test.yml
-# Synced:  2026-07-08T02:38:45.486Z
+# Synced:  2026-07-08T02:54:34.963Z
 # Tool:    scripts/sync-github.mts
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Test
 
 on:
   workflow_call:
+    inputs:
+      test-command:
+        description: Command to run tests with coverage
+        type: string
+        required: false
+        default: pnpm test -- --coverage
     secrets:
       CODECOV_TOKEN:
         required: false
@@ -27,7 +33,7 @@ jobs:
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
 
-      - run: pnpm test -- --coverage
+      - run: ${{ inputs.test-command }}
         name: Run tests with coverage
 
       - uses: codecov/codecov-action@v4

@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/workflows/release.yml
-# Synced:  2026-07-08T02:38:45.486Z
+# Synced:  2026-07-08T02:54:34.963Z
 # Tool:    scripts/sync-github.mts
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Release
@@ -13,10 +13,15 @@ on:
   workflow_call:
     inputs:
       run-build:
-        description: Run `pnpm build` before releasing
+        description: Run a build step before releasing
         type: boolean
         required: false
         default: true
+      build-command:
+        description: Build command to run when run-build is true
+        type: string
+        required: false
+        default: pnpm build
 
 jobs:
   release:
@@ -45,7 +50,7 @@ jobs:
       - run: npm install -g npm@11
         name: Upgrade npm for OIDC support
 
-      - run: pnpm build
+      - run: ${{ inputs.build-command }}
         name: Build
         if: ${{ inputs.run-build == true }}
 

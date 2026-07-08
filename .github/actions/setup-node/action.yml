@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/actions/setup-node/action.yml
-# Synced:  2026-07-08T02:38:45.486Z
+# Synced:  2026-07-08T02:54:34.963Z
 # Tool:    scripts/sync-github.mts
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Setup Node
@@ -32,6 +32,9 @@ runs:
         if [[ -f pnpm-lock.yaml ]]; then
           echo "name=pnpm"  >> "$GITHUB_OUTPUT"
           echo "cache=pnpm" >> "$GITHUB_OUTPUT"
+        elif [[ -f package-lock.json ]]; then
+          echo "name=npm"   >> "$GITHUB_OUTPUT"
+          echo "cache=npm"  >> "$GITHUB_OUTPUT"
         elif [[ -f yarn.lock ]]; then
           echo "name=yarn"  >> "$GITHUB_OUTPUT"
           echo "cache=yarn" >> "$GITHUB_OUTPUT"
