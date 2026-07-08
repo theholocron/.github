@@ -3,17 +3,20 @@
 # Synced:  2026-07-08T03:36:59.601Z
 # Tool:    scripts/sync-github.mts
 # Changes: edit setup-workflows.ts in theholocron/holocron and push.
-name: Greetings
+name: Release
 
-on: # yamllint disable-line rule:truthy
-  pull_request:
-  issues:
+on:
+  push:
+    branches:
+      - main
 
 permissions:
+  contents: write
+  id-token: write
   issues: write
   pull-requests: write
 
 jobs:
-  greetings:
-    uses: theholocron/.github/.github/workflows/greetings.yml@main
+  release:
+    uses: theholocron/.github/.github/workflows/release.yml@main
     secrets: inherit

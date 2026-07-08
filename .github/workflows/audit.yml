@@ -1,0 +1,43 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/cli/src/templates/workflows/audit.yml
+# Synced:  2026-07-08T03:36:59.601Z
+# Tool:    scripts/sync-github.mts
+# Changes: edit source in theholocron/holocron and push to alpha or main.
+name: Audit
+
+on:
+  workflow_call:
+    inputs:
+      build-script:
+        description: Script to build before analyzing bundle size
+        type: string
+        required: false
+        default: pnpm build
+    secrets:
+      BUNDLEWATCH_GITHUB_TOKEN:
+        required: true
+
+jobs:
+  bundle-size:
+    name: Audit the bundle size
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: audit-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout repository
+        with:
+          fetch-depth: 0
+
+      - uses: theholocron/.github/.github/actions/setup@main
+        name: Setup
+
+      - uses: jackyef/bundlewatch-gh-action@0.3.0
+        name: Analyze using BundleWatch
+        with:
+          build-script: ${{ inputs.build-script }}
+          bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}

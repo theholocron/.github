@@ -1,0 +1,56 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/cli/src/templates/workflows/release.yml
+# Synced:  2026-07-08T03:36:59.601Z
+# Tool:    scripts/sync-github.mts
+# Changes: edit source in theholocron/holocron and push to alpha or main.
+name: Release
+
+# Semantic-release with OIDC Trusted Publishing — no NPM_TOKEN required.
+# The calling repo must have a .releaserc.json that configures branches,
+# plugins, and any publish options. npm@11+ is installed to support OIDC.
+
+on:
+  workflow_call:
+    inputs:
+      run-build:
+        description: Run `pnpm build` before releasing
+        type: boolean
+        required: false
+        default: true
+
+jobs:
+  release:
+    name: Semantic release
+    permissions:
+      contents: write
+      id-token: write
+      issues: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # Do not cancel in-progress releases — a partial release is worse than a slow one.
+    concurrency:
+      group: release-${{ github.ref }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout repository
+        with:
+          fetch-depth: 0
+          token: ${{ github.token }}
+
+      - uses: theholocron/.github/.github/actions/setup@main
+        name: Setup
+
+      - run: npm install -g npm@11
+        name: Upgrade npm for OIDC support
+
+      - run: pnpm build
+        name: Build
+        if: ${{ inputs.run-build == true }}
+
+      - run: npx semantic-release
+        name: Release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          NPM_CONFIG_PROVENANCE: true

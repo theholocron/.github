@@ -1,0 +1,29 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/cli/src/templates/actions/setup/action.yml
+# Synced:  2026-07-08T03:36:59.601Z
+# Tool:    scripts/sync-github.mts
+# Changes: edit source in theholocron/holocron and push to alpha or main.
+name: Setup
+description: Prepare the environment and install project dependencies.
+
+inputs:
+  node-version:
+    description: Node.js version
+    required: false
+    default: "22.x"
+
+  pnpm-version:
+    description: pnpm version
+    required: false
+    default: "10"
+
+runs:
+  using: composite
+
+  steps:
+    - uses: ./.github/actions/setup-node
+      with:
+        node-version: ${{ inputs.node-version }}
+        pnpm-version: ${{ inputs.pnpm-version }}
+
+    - uses: ./.github/actions/install

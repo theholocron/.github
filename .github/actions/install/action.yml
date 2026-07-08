@@ -1,0 +1,15 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/cli/src/templates/actions/install/action.yml
+# Synced:  2026-07-08T03:36:59.601Z
+# Tool:    scripts/sync-github.mts
+# Changes: edit source in theholocron/holocron and push to alpha or main.
+name: Install dependencies
+description: Install project dependencies with pnpm frozen lockfile.
+
+runs:
+  using: composite
+
+  steps:
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile

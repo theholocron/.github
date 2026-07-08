@@ -1,72 +1,146 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/cli/src/templates/workflows/review.yml
+# Synced:  2026-07-08T03:36:59.601Z
+# Tool:    scripts/sync-github.mts
+# Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Review
 
-on: # yamllint disable-line rule:truthy
-  - push
-  - pull_request
+# ReviewDog is the annotation layer — runs linters and posts inline PR diff
+# annotations. Runs on pull_request only (annotation reporters require PR context).
+# super-linter (lint.yml) is the CI gate that runs on push + PR.
+# Gitleaks and YAML are intentionally duplicated here: super-linter catches
+# them as CI failures, ReviewDog surfaces them as inline diff annotations.
+
+on:
+  workflow_call:
+
+concurrency:
+  group: review-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   reviewdog:
     name: Review PRs
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+
     steps:
-      - uses: actions/checkout@v4
-        name: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      # - uses: actions/setup-node@v4
-      #   name: Setup Node.js @v20
-      #   with:
-      #     cache: npm
-      #     node-version: 20.x
+      - name: Setup
+        if: ${{ hashFiles('pnpm-lock.yaml') != '' }}
+        uses: theholocron/.github/.github/actions/setup@main
 
-      # - run: npm ci
-      #   name: Install dependencies
+      - name: Install ReviewDog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
 
-      # - uses: reviewdog/action-setup@v1
-      #   name: Install & setup ReviewDog
-      #   with:
-      #     reviewdog_version: latest # Optional. [latest,nightly,v.X.Y.Z]
+      #
+      # Always applicable
+      #
 
-      - uses: reviewdog/action-gitleaks@v1
-        name: Detect secrets using Gitleaks
+      - name: Gitleaks (secrets)
+        uses: reviewdog/action-gitleaks@v1
         with:
           reporter: github-pr-check
 
-      - uses: reviewdog/action-alex@v1
-        name: Check language using Alex
+      - name: YamlLint
+        uses: reviewdog/action-yamllint@v1
         with:
-          reporter: github-pr-check # [github-pr-check,github-check,github-pr-review]
-          # GitHub Status Check won't become failure with warning.
-          # level: warning # [info,warning, error]
+          reporter: github-pr-check
+          yamllint_flags: >-
+            ${{ hashFiles('yamllint.config.yml') != ''
+                && format('-c {0}/yamllint.config.yml {0}', github.workspace)
+                || github.workspace }}
 
-      # - uses: EPMatt/reviewdog-action-tsc@v1
-      #   name: Check types using TypeScript
-      #   with:
-      #     reporter: github-pr-check
-
-      # - uses: reviewdog/action-stylelint@v1
-      #   name: Check CSS using StyleLint
-      #   with:
-      #     reporter: github-pr-check
-      #     stylelint_input: '**/*.css'
-
-      # need to setup textlint in the repo for this
-      # - uses: tsuyoshicho/action-textlint@v3
-      #   name: Check text using TextLint
-      #   with:
-      #     reporter: github-pr-check
-
-      - uses: reviewdog/action-actionlint@v1
-        name: Check GitHub Actions using ActionLint
+      - name: ActionLint (GitHub Actions)
+        if: ${{ hashFiles('.github/workflows/*.yml', '.github/workflows/*.yaml') != '' }}
+        uses: reviewdog/action-actionlint@v1
         with:
           reporter: github-pr-check
 
-      # - uses: dotenv-linter/action-dotenv-linter@v2
-      #   name: Check environment variables using dotenv
-      #   with:
-      #     reporter: github-code-suggestions
+      #
+      # TypeScript / JavaScript
+      #
 
-      - uses: reviewdog/action-yamllint@v1
-        name: Check YAML using YamlLint
+      - name: ESLint
+        if: >-
+          ${{
+            hashFiles(
+              '**/eslint.config.js',
+              '**/eslint.config.mjs',
+              '**/eslint.config.cjs',
+              '**/eslint.config.ts',
+              '**/.eslintrc',
+              '**/.eslintrc.js',
+              '**/.eslintrc.cjs',
+              '**/.eslintrc.json',
+              '**/.eslintrc.yaml',
+              '**/.eslintrc.yml'
+            ) != ''
+          }}
+        uses: reviewdog/action-eslint@v1
         with:
           reporter: github-pr-check
-          yamllint_flags: "-c ${{ github.workspace }}/yamllint.config.yml ${{ github.workspace }}"
+          eslint_flags: .
+
+      - name: TypeScript
+        if: ${{ hashFiles('**/tsconfig.json') != '' }}
+        uses: EPMatt/reviewdog-action-tsc@v1
+        with:
+          reporter: github-pr-check
+
+      #
+      # Shell
+      #
+
+      - name: ShellCheck
+        if: ${{ hashFiles('**/*.sh') != '' }}
+        uses: reviewdog/action-shellcheck@v1
+        with:
+          reporter: github-pr-check
+          fail_level: none
+
+      #
+      # Docker
+      #
+
+      - name: Hadolint
+        if: >-
+          ${{
+            hashFiles(
+              '**/Dockerfile',
+              '**/*.Dockerfile',
+              '**/Containerfile'
+            ) != ''
+          }}
+        uses: reviewdog/action-hadolint@v1
+        with:
+          reporter: github-pr-check
+          fail_level: none
+
+      #
+      # Environment files
+      #
+
+      - name: dotenv-linter
+        if: ${{ hashFiles('**/.env*') != '' }}
+        uses: dotenv-linter/action-dotenv-linter@v2
+        with:
+          reporter: github-code-suggestions
+
+      #
+      # Documentation
+      #
+
+      - name: Alex (inclusive language)
+        if: ${{ hashFiles('**/*.md') != '' }}
+        uses: reviewdog/action-alex@v1
+        with:
+          reporter: github-pr-check

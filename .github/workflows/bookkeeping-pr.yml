@@ -1,33 +1,36 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/cli/src/templates/workflows/bookkeeping-pr.yml
+# Synced:  2026-07-08T03:36:59.601Z
+# Tool:    scripts/sync-github.mts
+# Changes: edit source in theholocron/holocron and push to alpha or main.
 name: PR Bookkeeping
 
-# @TODO: add in more things like:
-# - [ ] fix it
-# - [ ] auto-assigning,
-# - [ ] project assignments,
-# - [ ] milestone assignments
-# - [ ] cleans up language
-# - [ ] checks that template is filled out
-
-on: # yamllint disable-line rule:truthy
-  pull_request:
-    types:
-      - opened
-      - edited
-
-permissions:
-  contents: read
-  pull-requests: write
+on:
+  workflow_call:
+    inputs:
+      configuration-path:
+        description: Path to the labeler configuration file in the calling repo
+        type: string
+        required: false
+        default: .github/labeler.yml
 
 jobs:
-  label-pr:
+  label:
     name: Add Labels to PRs
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    concurrency:
+      group: bookkeeping-pr-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
     steps:
       - uses: github/issue-labeler@v3.4
         with:
+          configuration-path: ${{ inputs.configuration-path }}
           include-title: 1
           include-body: 0
           sync-labels: 1
-          configuration-path: .github/labeler.yml
           enable-versioned-regex: 0
           repo-token: ${{ github.token }}

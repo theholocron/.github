@@ -1,0 +1,33 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/cli/src/templates/actions/setup-node/action.yml
+# Synced:  2026-07-08T03:36:59.601Z
+# Tool:    scripts/sync-github.mts
+# Changes: edit source in theholocron/holocron and push to alpha or main.
+name: Setup Node
+description: Install pnpm and Node.js with pnpm dependency caching.
+
+inputs:
+  node-version:
+    description: Node.js version
+    required: false
+    default: "22.x"
+
+  pnpm-version:
+    description: pnpm version
+    required: false
+    default: "10"
+
+runs:
+  using: composite
+
+  steps:
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: ${{ inputs.pnpm-version }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: pnpm

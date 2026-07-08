@@ -1,0 +1,5 @@
+{
+  "name": "Release",
+  "description": "Semantic versioning, changelog generation, and npm publish via OIDC.",
+  "iconName": "octicon package"
+}
