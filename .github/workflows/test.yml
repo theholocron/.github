@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/workflows/test.yml
-# Synced:  2026-07-08T03:36:59.601Z
+# Synced:  2026-07-08T15:41:32.412Z
 # Tool:    scripts/sync-github.mts
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Test
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         name: Checkout repository
         with:
           fetch-depth: 0
@@ -30,7 +30,7 @@ jobs:
       - run: pnpm test -- --coverage
         name: Run tests with coverage
 
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4
         name: Upload results to Codecov
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
