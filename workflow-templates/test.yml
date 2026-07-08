@@ -1,12 +1,13 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/commands/setup-workflows.ts
-# Synced:  2026-07-08T15:41:32.412Z
+# Synced:  2026-07-08T19:30:52.886Z
 # Tool:    scripts/sync-github.mts
 # Changes: edit setup-workflows.ts in theholocron/holocron and push.
 name: Test
 
 on: # yamllint disable-line rule:truthy
   push:
+    branches: [main, alpha]
   pull_request:
 
 concurrency:
@@ -18,5 +19,6 @@ permissions:
 
 jobs:
   test:
+    name: Test
     uses: theholocron/.github/.github/workflows/test.yml@main
     secrets: inherit
