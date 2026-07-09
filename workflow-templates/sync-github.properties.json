@@ -1,0 +1,5 @@
+{
+  "name": "Sync GitHub Templates",
+  "description": "Sync workflow templates and composite actions from the holocron CLI.",
+  "iconName": "octicon sync"
+}

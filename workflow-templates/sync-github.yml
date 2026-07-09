@@ -3,22 +3,27 @@
 # Synced:  2026-07-09T17:58:43.324Z
 # Tool:    holocron sync-github
 # Changes: edit setup-workflows.ts in theholocron/holocron and push.
-name: Typecheck
+name: Sync GitHub Templates
 
 on: # yamllint disable-line rule:truthy
   push:
     branches: [main, alpha]
-  pull_request:
+    paths:
+      - packages/cli/src/templates/index.ts
+      - packages/cli/src/commands/setup-workflows.ts
 
 concurrency:
-  group: typecheck-${{ github.ref }}
+  group: sync-github-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
   contents: read
 
 jobs:
-  typecheck:
-    name: Typecheck
-    uses: theholocron/.github/.github/workflows/typecheck.yml@main
-    secrets: inherit
+  sync:
+    name: Sync
+    uses: theholocron/.github/.github/workflows/sync-github.yml@main
+    with:
+      secondary-repos: theholocron/.github-private
+    secrets:
+      SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
