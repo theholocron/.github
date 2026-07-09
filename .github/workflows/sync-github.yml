@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-07-09T22:56:01.349Z
+# Synced:  2026-07-09T23:01:00.937Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Sync GitHub Templates
@@ -61,8 +61,9 @@ jobs:
           node packages/cli/dist/cli.mjs sync-github \
             --repo "$PRIMARY_REPO" \
             --output-dir /tmp/sync-validate
-          bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash) 1.7.7
-          ./actionlint /tmp/sync-validate/.github/workflows/*.yml
+          curl -fsSL https://github.com/rhysd/actionlint/releases/download/v1.7.7/actionlint_1.7.7_linux_amd64.tar.gz \
+            | tar -xz -C /tmp actionlint
+          /tmp/actionlint /tmp/sync-validate/.github/workflows/*.yml
         env:
           PRIMARY_REPO: ${{ inputs.primary-repo }}
 
