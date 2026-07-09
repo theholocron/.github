@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-07-09T17:58:43.324Z
+# Synced:  2026-07-09T19:33:19.995Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Setup Node
@@ -12,19 +12,12 @@ inputs:
     required: false
     default: "22.x"
 
-  pnpm-version:
-    description: pnpm version
-    required: false
-    default: "10"
-
 runs:
   using: composite
 
   steps:
     - name: Setup pnpm
       uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
-      with:
-        version: ${{ inputs.pnpm-version }}
 
     - name: Setup Node.js
       uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
