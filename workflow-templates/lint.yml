@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/commands/setup-workflows.ts
-# Synced:  2026-07-09T20:21:29.175Z
+# Synced:  2026-07-09T20:32:43.501Z
 # Tool:    holocron sync-github
 # Changes: edit setup-workflows.ts in theholocron/holocron and push.
 name: Lint
