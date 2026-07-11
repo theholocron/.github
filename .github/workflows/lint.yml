@@ -38,7 +38,7 @@ jobs:
     env:
       GPG_KEY_SET: ${{ secrets.SUPER_LINTER_GPG_PRIVATE_KEY != '' }}
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
         with:
           fetch-depth: 0
@@ -47,7 +47,7 @@ jobs:
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
 
-      - uses: super-linter/super-linter/slim@b92721f792f381cedc002ecdbb9847a15ece5bb8 # v7.1.0
+      - uses: super-linter/super-linter/slim@4ce20838b8ab83717e78138c5b3a1407148e0918 # v8.7.0
         name: Run Super Linter
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -82,7 +82,7 @@ jobs:
           VALIDATE_YAML: true
           YAML_CONFIG_FILE: ${{ inputs.yaml-config }}
 
-      - uses: crazy-max/ghaction-import-gpg@e89d40939c28e39f97cf32126055eeae86ba74ec # v6
+      - uses: crazy-max/ghaction-import-gpg@2dc316deee8e90f13e1a351ab510b4d5bc0c82cd # v7.0.0
         name: Import GPG Key
         # Conditions mirror auto-commit exactly — no point importing GPG if the
         # commit step will be skipped (fork PR, default branch, or secret unset).
@@ -98,7 +98,7 @@ jobs:
           GPG_PRIVATE_KEY: ${{ secrets.SUPER_LINTER_GPG_PRIVATE_KEY }}
           PASSPHRASE: ${{ secrets.SUPER_LINTER_GPG_PASSPHRASE }}
 
-      - uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403 # v5
+      - uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
         name: Commit and push linting fixes
         if: >
           inputs.enable-auto-commit == true &&
