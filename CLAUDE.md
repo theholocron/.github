@@ -21,8 +21,8 @@ overwritten on the next sync.
 
 | Path | Owned here? | Source |
 |---|---|---|
-| `.github/workflows/*.yml` | **No — generated** | `holocron/packages/cli/src/templates/workflows/` |
-| `.github/actions/*/action.yml` | **No — generated** | `holocron/packages/cli/src/templates/actions/` |
+| `.github/workflows/*.yml` | **No — generated** | `holocron/packages/cli/src/templates/index.ts` (`REUSABLE_WORKFLOWS`) |
+| `.github/actions/*/action.yml` | **No — generated** | `holocron/packages/cli/src/templates/index.ts` (`ACTIONS`) |
 | `workflow-templates/*.yml` | **No — generated** | `holocron/packages/cli/src/templates/` |
 | `workflow-templates/*.properties.json` | **No — generated** | `holocron/packages/cli/src/templates/` |
 | `.github/ISSUE_TEMPLATE/` | Yes | Hand-maintained here |
@@ -52,8 +52,9 @@ Every generated file begins with:
 ## How to update a generated workflow or action
 
 1. Open `theholocron/holocron` (local path: `~/Code/theholocron/holocron/`)
-2. Edit `packages/cli/src/templates/workflows/<name>.yml` or
-   `packages/cli/src/templates/actions/<name>/action.yml`
+2. Edit `packages/cli/src/templates/index.ts` — workflows are in the `REUSABLE_WORKFLOWS`
+   export, actions are in the `ACTIONS` export (the `workflows/` and `actions/` YAML files
+   were removed; `index.ts` is the single source of truth)
 3. Push to `alpha` — **this is the active trigger branch right now** (see note below)
 4. The `sync-github.yml` CI workflow in `holocron` runs `holocron sync-github`,
    opens a PR here on branch `chore/sync-templates`
