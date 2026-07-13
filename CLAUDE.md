@@ -173,8 +173,15 @@ branch protection rulesets, and Dependabot config.
 This repo's own `holocron.config.json` uses `"preset": "balanced"` because
 it has no test or build workflows of its own.
 
+**Config format rule:** repos with a `package.json` should use
+`holocron.config.ts` with `defineConfig` from `@theholocron/cli` — it
+provides typed autocomplete and catches config errors at edit time. This
+repo uses JSON because it has no `package.json`; `@theholocron/cli` cannot
+be resolved at runtime without one.
+
 ## Workflow
 
+- **Always open a PR — never push directly to the default branch.** Even for small fixes: create a branch, push it, open a PR. This lets CI run, keeps history reviewable, and respects branch protection. The only exception is bootstrapping a brand-new repo before protection is set up.
 - **Commits use Conventional Commits.** `ci:` for workflow changes, `docs:`
   for community health files, `chore:` for maintenance.
 - **Always `git commit -s`** (DCO). `Signed-off-by:` trailer required.
