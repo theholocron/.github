@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-07-11T04:51:43.714Z
+# Synced:  2026-07-14T19:42:05.345Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Audit
@@ -9,13 +9,13 @@ on: # yamllint disable-line rule:truthy
   workflow_call:
     inputs:
       build-script:
-        description: Script to build before analyzing bundle size
+        description: Script to build and upload bundle stats to Codecov
         type: string
         required: false
         default: pnpm build
     secrets:
-      BUNDLEWATCH_GITHUB_TOKEN:
-        required: true
+      CODECOV_TOKEN:
+        required: false
 
 jobs:
   bundle-size:
@@ -36,8 +36,7 @@ jobs:
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
 
-      - uses: jackyef/bundlewatch-gh-action@01f51133d3580a6daa046ca83eb233d79735e1c1 # 0.3.0
-        name: Analyze using BundleWatch
-        with:
-          build-script: ${{ inputs.build-script }}
-          bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
+      - run: ${{ inputs.build-script }}
+        name: Build and upload bundle stats
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-07-11T04:51:43.714Z
+# Synced:  2026-07-14T19:42:05.345Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Release
@@ -51,6 +51,16 @@ jobs:
 
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
+
+      - name: Configure git identity
+        run: |
+          GIT_NAME=$(gh api user --jq .name 2>/dev/null || echo "github-actions[bot]")
+          GIT_EMAIL=$(gh api user --jq '"\(.id)+\(.login)@users.noreply.github.com"' 2>/dev/null || echo "41898282+github-actions[bot]@users.noreply.github.com")
+          git config --global user.name "$GIT_NAME"
+          git config --global user.email "$GIT_EMAIL"
+          git config --global format.signoff true
+        env:
+          GH_TOKEN: ${{ secrets.SYNC_TOKEN || github.token }}
 
       - run: npm install -g npm@11 sigstore
         name: Upgrade npm for OIDC support
