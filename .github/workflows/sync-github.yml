@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-07-11T04:51:43.714Z
+# Synced:  2026-07-14T19:42:05.345Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Sync GitHub Templates
@@ -70,13 +70,18 @@ jobs:
           PRIMARY_REPO: ${{ inputs.primary-repo }}
 
       - name: Sync primary repo (PR)
-        run: >
-          node packages/cli/dist/cli.mjs sync-github
-          --repo "$PRIMARY_REPO"
-          --branch "$SYNC_BRANCH"
-          --pr
+        run: |
+          GIT_NAME=$(gh api user --jq .name 2>/dev/null || echo "github-actions[bot]")
+          GIT_EMAIL=$(gh api user --jq '"\(.id)+\(.login)@users.noreply.github.com"' 2>/dev/null || echo "41898282+github-actions[bot]@users.noreply.github.com")
+          COMMIT_MSG="chore: sync from theholocron/holocron"$'\n\n'"Signed-off-by: $GIT_NAME <$GIT_EMAIL>"
+          node packages/cli/dist/cli.mjs sync-github \
+            --repo "$PRIMARY_REPO" \
+            --branch "$SYNC_BRANCH" \
+            --pr \
+            --message "$COMMIT_MSG"
         env:
           GITHUB_TOKEN: ${{ secrets.SYNC_TOKEN }}
+          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
           PRIMARY_REPO: ${{ inputs.primary-repo }}
           SYNC_BRANCH: ${{ inputs.sync-branch }}
 

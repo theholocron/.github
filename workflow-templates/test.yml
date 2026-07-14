@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/commands/setup-workflows.ts
-# Synced:  2026-07-11T04:51:43.715Z
+# Synced:  2026-07-14T19:42:05.345Z
 # Tool:    holocron sync-github
 # Changes: edit setup-workflows.ts in theholocron/holocron and push.
 name: Test

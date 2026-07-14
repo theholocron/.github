@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-07-11T04:51:43.714Z
+# Synced:  2026-07-14T19:42:05.345Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Lint
@@ -46,6 +46,7 @@ jobs:
 
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
+        if: ${{ hashFiles('pnpm-lock.yaml') != '' }}
 
       - uses: super-linter/super-linter/slim@4ce20838b8ab83717e78138c5b3a1407148e0918 # v8.7.0
         name: Run Super Linter
