@@ -1,5 +1,7 @@
 <!-- editorconfig-checker-disable-file -->
 
+@../github-private/CLAUDE.md
+
 # CLAUDE.md
 
 Conventions for working on `theholocron/.github`. Loaded automatically by
@@ -151,66 +153,17 @@ The `sync-github` workflow in `holocron` can target multiple repos:
 - **Secondary repos** — receive reusable workflows + thin callers via direct
   push to main
 
-## `holocron setup` and `holocron.config.json`
+## `holocron.config.json`
 
-Repos that run `holocron setup` (using `@theholocron/cli`) have a
-`holocron.config.json` that declares which workflows they want:
-
-```jsonc
-{
-  "project": {
-    "name": "my-project",
-    "repo": "theholocron/my-project",
-    "workflows": ["lint", "test", "typecheck", "codeql", "review", "release"]
-  },
-  "providers": { "source": "github", "ci": "github", "secrets": "github" }
-}
-```
-
-`holocron setup` writes thin caller files to the repo's `.github/workflows/`
-that delegate to the reusable workflows here. It also sets repo settings,
-branch protection rulesets, and Dependabot config.
-
-This repo's own `holocron.config.json` uses `"preset": "balanced"` because
-it has no test or build workflows of its own.
-
-**Config format rule:** repos with a `package.json` should use
-`holocron.config.ts` with `defineConfig` from `@theholocron/cli` — it
-provides typed autocomplete and catches config errors at edit time. This
-repo uses JSON because it has no `package.json`; `@theholocron/cli` cannot
-be resolved at runtime without one.
-
-**Installing the CLI in repos with `package.json`:** add `@theholocron/cli`
-and `@theholocron/holocron-plugin-github` as devDependencies under a named
-catalog so they stay pinned and separate from tool-config packages:
-
-```yaml
-# pnpm-workspace.yaml
-catalogs:
-  holocron:
-    '@theholocron/cli': 2.0.0-alpha.22
-    '@theholocron/holocron-plugin-github': 2.0.0-alpha.22
-```
-
-```json
-// package.json devDependencies
-"@theholocron/cli": "catalog:holocron",
-"@theholocron/holocron-plugin-github": "catalog:holocron"
-```
-
-Then run setup with: `GITHUB_TOKEN=$(gh auth token) pnpm exec holocron setup`
-
-Bump both catalog entries together when upgrading — they publish in lockstep.
-`theholocron/configs` and `theholocron/clients` are the canonical examples.
+This repo uses `holocron.config.json` (not `.ts`) because it has no
+`package.json` — `@theholocron/cli` cannot be resolved at runtime without one.
+This repo's config uses `"preset": "balanced"` because it has no test or build
+workflows of its own.
 
 ## Workflow
 
-- **Always open a PR — never push directly to the default branch.** Even for small fixes: create a branch, push it, open a PR. This lets CI run, keeps history reviewable, and respects branch protection. The only exception is bootstrapping a brand-new repo before protection is set up.
-- **Commits use Conventional Commits.** `ci:` for workflow changes, `docs:`
+- Conventional Commit types for this repo: `ci:` for workflow changes, `docs:`
   for community health files, `chore:` for maintenance.
-- **Always `git commit -s`** (DCO). `Signed-off-by:` trailer required.
-- **No Claude attribution** in commits, PRs, issues, or docs.
-- **One PR = one focused change.** Squash-merge.
 - For generated file updates, the sync mechanism opens the PR automatically —
   don't manually apply those changes.
 
