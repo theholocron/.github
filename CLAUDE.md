@@ -1,5 +1,3 @@
-<!-- editorconfig-checker-disable-file -->
-
 @../github-private/CLAUDE.md
 
 # CLAUDE.md
@@ -39,7 +37,17 @@ overwritten on the next sync.
 | `.github/SUPPORT.md` | Yes | Hand-maintained here |
 | `.github/FUNDING.yml` | Yes | Hand-maintained here |
 | `profile/` | Yes | Hand-maintained here |
+| `.alexignore` | Yes | Hand-maintained here |
+| `.alexrc.json` | Yes | Hand-maintained here — keep in sync with org standard; no `package.json` so `holocron setup` cannot run here |
+| `.editorconfig` | Yes | Hand-maintained here |
+| `.editorconfig-checker.json` | Yes | Hand-maintained here — keep in sync with org standard; no `package.json` so `holocron setup` cannot run here |
+| `.gitattributes` | Yes | Hand-maintained here |
+| `.gitignore` | Yes | Hand-maintained here |
+| `CLAUDE.md` | Yes | Hand-maintained here |
+| `holocron.config.json` | Yes | Hand-maintained here |
+| `LICENSE` | Yes | Hand-maintained here |
 | `README.md` | Yes | Hand-maintained here |
+| `yamllint.config.yml` | Yes | Hand-maintained here |
 
 Every generated file begins with:
 
@@ -145,6 +153,8 @@ Any `theholocron/*` repo with a `holocron.config.json` and a
 Key repos in the org:
 - `theholocron/holocron` — the CLI source; also the origin of all syncs
 - `theholocron/configs` — shared config packages (`@theholocron/*-config`)
+- `theholocron/clients` — HTTP clients and API wrappers
+- `theholocron/.github-private` — internal member documentation
 - `theholocron/.github` — this repo
 
 The `sync-github` workflow in `holocron` can target multiple repos:
