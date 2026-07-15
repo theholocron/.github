@@ -97,8 +97,40 @@ Running `pnpm holocron setup` (or `npx @theholocron/cli setup`) will:
 - Create branch protection rulesets with the configured required checks
 - Write thin workflow caller files to `.github/workflows/`
 - Provision `.github/dependabot.yml` with grouped update configuration
+- Sync repo labels to the [canonical set](#labels) (create missing, fix drift, delete stale)
 
 See [theholocron/holocron](https://github.com/theholocron/holocron) for the full CLI docs.
+
+## Labels
+
+Every repo in the org uses the same label set, applied and kept in sync by
+`holocron setup`. The `bookkeeping-pr` workflow maps Conventional Commit title
+prefixes to these labels automatically.
+
+| Label | Color | Description | Auto-applied from |
+|---|---|---|---|
+| `bug` | `d73a4a` | Something isn't working | `fix:` |
+| `chore` | `ededed` | Maintenance, no user-facing change | `chore:` |
+| `ci` | `0075ca` | CI/CD pipeline changes | `ci:` |
+| `dependencies` | `0366d6` | Dependency update | `chore(deps):` / Dependabot |
+| `documentation` | `0075ca` | Documentation only | `docs:` |
+| `duplicate` | `cfd3d7` | Already reported | — |
+| `enhancement` | `a2eeef` | New feature or request | `feat:` |
+| `good first issue` | `7057ff` | Good for newcomers | — |
+| `help wanted` | `008672` | Extra attention needed | — |
+| `invalid` | `e4e669` | Doesn't seem right | — |
+| `performance` | `fbca04` | Performance improvement | `perf:` |
+| `question` | `d876e3` | Further information requested | — |
+| `refactor` | `cfd3d7` | Code restructuring | `refactor:` |
+| `released` | `ededed` | Included in a release | — |
+| `test` | `bfd4f2` | Test-related changes | `test:` |
+| `triage` | `e4e669` | Needs investigation | — |
+| `wontfix` | `ffffff` | Won't be addressed | — |
+
+The canonical set is defined in
+[`CANONICAL_LABELS` in `theholocron/holocron`](https://github.com/theholocron/holocron/blob/alpha/packages/cli/src/commands/setup.ts).
+To change a label, edit that constant and open a PR — the next `holocron setup`
+run in each repo picks up the change.
 
 ## Source of truth
 
