@@ -1,7 +1,5 @@
 @../github-private/CLAUDE.md
 
-@../github-private/CLAUDE.md
-
 # CLAUDE.md
 
 Conventions for working on `theholocron/.github`. Loaded automatically by
