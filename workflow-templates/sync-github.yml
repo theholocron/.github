@@ -1,8 +1,8 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/commands/setup-workflows.ts
-# Synced:  2026-07-15T16:54:15.006Z
+# Synced:  2026-07-15T18:23:15.539Z
 # Tool:    holocron sync-github
-# Changes: edit setup-workflows.ts in theholocron/holocron and push.
+# Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Sync GitHub Templates
 
 on: # yamllint disable-line rule:truthy
