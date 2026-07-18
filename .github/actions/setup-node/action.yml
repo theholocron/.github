@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-07-16T17:08:46.842Z
+# Synced:  2026-07-18T03:38:22.338Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Setup Node
@@ -23,7 +23,8 @@ runs:
     - name: Setup Node.js
       uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
       with:
-        node-version: ${{ inputs.node-version }}
+        node-version: ${{ hashFiles('.node-version') != '' && '' || inputs.node-version }}
+        node-version-file: ${{ hashFiles('.node-version') != '' && '.node-version' || '' }}
         cache: ${{ hashFiles('pnpm-lock.yaml') != '' && 'pnpm' || '' }}
 
     - name: Add node_modules/.bin to PATH
