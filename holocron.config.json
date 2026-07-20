@@ -1,17 +1,15 @@
 {
-  "project": {
-    "name": ".github",
-    "description": "Org-level community health files, reusable CI workflows, and workflow templates for theholocron.",
-    "repo": {
-      "name": "theholocron/.github",
-      "protection": "balanced",
-      "topics": ["github-actions", "github-config", "reusable-workflows"],
-      "properties": {
-        "lifecycle": "active",
-        "open_source": true,
-        "runtime_environment": "none",
-        "uses_external_packages": false
-      }
+  "name": ".github",
+  "description": "Org-level community health files, reusable CI workflows, and workflow templates for theholocron.",
+  "repo": {
+    "name": "theholocron/.github",
+    "protection": "balanced",
+    "topics": ["github-actions", "github-config", "reusable-workflows"],
+    "properties": {
+      "lifecycle": "active",
+      "open_source": true,
+      "runtime_environment": "none",
+      "uses_external_packages": false
     }
   },
   "providers": {
