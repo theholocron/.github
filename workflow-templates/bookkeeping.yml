@@ -3,17 +3,19 @@
 # Synced:  2026-07-21T20:57:17.269Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
-name: Greetings
+name: Bookkeeping
 
 on: # yamllint disable-line rule:truthy
   pull_request:
-  issues:
+    types:
+      - opened
+      - edited
 
 permissions:
-  issues: write
+  contents: read
   pull-requests: write
 
 jobs:
-  greetings:
-    uses: theholocron/.github/.github/workflows/greetings.yml@main
+  bookkeeping:
+    uses: theholocron/.github/.github/workflows/bookkeeping.yml@main
     secrets: inherit
