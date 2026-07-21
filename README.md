@@ -1,4 +1,4 @@
-# @theholocron/.github
+# `@theholocron/.github`
 
 <!-- holocron:description -->
 Org-level community health files, reusable CI workflows, and workflow templates.
