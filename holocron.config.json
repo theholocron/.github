@@ -1,6 +1,6 @@
 {
   "name": ".github",
-  "description": "Org-level community health files, reusable CI workflows, and workflow templates for theholocron.",
+  "description": "Org-level community health files, reusable CI workflows, and workflow templates.",
   "repo": {
     "name": "theholocron/.github",
     "protection": "balanced",

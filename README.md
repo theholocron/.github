@@ -1,8 +1,8 @@
 # @theholocron/.github
 
-Org-level community health files, reusable CI workflows, composite actions,
-and workflow starter templates for the `theholocron` org — and any org that
-wants to reuse them.
+<!-- holocron:description -->
+Org-level community health files, reusable CI workflows, and workflow templates.
+<!-- /holocron:description -->
 
 ## Using reusable workflows
 
