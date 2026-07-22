@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-07-22T06:19:59.789Z
+# Synced:  2026-07-22T16:18:43.677Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Review
@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
 
@@ -80,7 +80,7 @@ jobs:
 
       - name: YamlLint
         if: ${{ hashFiles('yamllint.config.yml') != '' }}
-        uses: reviewdog/action-yamllint@e02a49fdf53f51ddd8dfa89b09aa975043aeba38 # v1
+        uses: reviewdog/action-yamllint@b5f7217d8c815ae374d1d55840d5e569d82f01f0 # v1
         with:
           reporter: github-pr-check
           tool_name: "Review / yamllint"
@@ -88,7 +88,7 @@ jobs:
 
       - name: ActionLint (GitHub Actions)
         if: ${{ hashFiles('.github/workflows/*.yml', '.github/workflows/*.yaml') != '' }}
-        uses: reviewdog/action-actionlint@50842263c20a7c46bd0065b9e624d3c569db061e # v1
+        uses: reviewdog/action-actionlint@6fb7acc99f4a1008869fa8a0f09cfca740837d9d # v1
         with:
           reporter: github-pr-check
           tool_name: "Review / actionlint"
