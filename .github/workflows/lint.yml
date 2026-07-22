@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-07-22T06:19:59.789Z
+# Synced:  2026-07-22T16:18:43.677Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Lint
@@ -38,7 +38,7 @@ jobs:
     env:
       GPG_KEY_SET: ${{ secrets.SUPER_LINTER_GPG_PRIVATE_KEY != '' }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
         with:
           fetch-depth: 0
