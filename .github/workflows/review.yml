@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-07-21T20:57:17.269Z
+# Synced:  2026-07-22T06:19:59.789Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Review
@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
@@ -75,20 +75,23 @@ jobs:
         uses: reviewdog/action-gitleaks@2b7b5685e3e3eecddab5d30cfa04f18123031421 # v1
         with:
           reporter: github-pr-check
+          tool_name: "Review / gitleaks"
           gitleaks_flags: --log-opts=${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
 
       - name: YamlLint
         if: ${{ hashFiles('yamllint.config.yml') != '' }}
-        uses: reviewdog/action-yamllint@b5f7217d8c815ae374d1d55840d5e569d82f01f0 # v1
+        uses: reviewdog/action-yamllint@e02a49fdf53f51ddd8dfa89b09aa975043aeba38 # v1
         with:
           reporter: github-pr-check
+          tool_name: "Review / yamllint"
           yamllint_flags: -c ${{ github.workspace }}/yamllint.config.yml ${{ github.workspace }}
 
       - name: ActionLint (GitHub Actions)
         if: ${{ hashFiles('.github/workflows/*.yml', '.github/workflows/*.yaml') != '' }}
-        uses: reviewdog/action-actionlint@6fb7acc99f4a1008869fa8a0f09cfca740837d9d # v1
+        uses: reviewdog/action-actionlint@50842263c20a7c46bd0065b9e624d3c569db061e # v1
         with:
           reporter: github-pr-check
+          tool_name: "Review / actionlint"
 
       #
       # TypeScript / JavaScript
@@ -99,6 +102,7 @@ jobs:
         uses: reviewdog/action-eslint@556a3fdaf8b4201d4d74d406013386aa4f7dab96 # v1.34.0
         with:
           reporter: github-pr-check
+          tool_name: "Review / eslint"
           eslint_flags: .
 
       - name: TypeScript
@@ -106,6 +110,7 @@ jobs:
         uses: EPMatt/reviewdog-action-tsc@63d923a3c5b4497671940b8874f58a404e2351b5 # v1
         with:
           reporter: github-pr-check
+          tool_name: "Review / tsc"
 
       #
       # Shell
@@ -116,6 +121,7 @@ jobs:
         uses: reviewdog/action-shellcheck@4c07458293ac342d477251099501a718ae5ef86e # v1
         with:
           reporter: github-pr-check
+          tool_name: "Review / shellcheck"
           fail_level: none
 
       #
@@ -127,6 +133,7 @@ jobs:
         uses: reviewdog/action-hadolint@1b2cfa6ba72072ad35158d7ff3aa49bbdc03506d # v1
         with:
           reporter: github-pr-check
+          tool_name: "Review / hadolint"
           fail_level: none
 
       #
@@ -148,3 +155,4 @@ jobs:
         uses: reviewdog/action-alex@347481655add010a2ae302df34b57c9bcfa0d6e4 # v1
         with:
           reporter: github-pr-check
+          tool_name: "Review / alex"
