@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-07-23T15:34:50.344Z
+# Synced:  2026-07-27T21:15:49.624Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Sync GitHub Templates
@@ -41,6 +41,16 @@ on: # yamllint disable-line rule:truthy
     secrets:
       HOLOCRON_SYNC_TOKEN:
         required: true
+      HOLOCRON_READ_TOKEN:
+        description: >
+          Fine-grained PAT for read-only GitHub API calls (e.g. resolving git
+          committer identity via `gh api user`). Falls back to HOLOCRON_SYNC_TOKEN.
+        required: false
+      GH_TOKEN:
+        description: >
+          Generic GitHub token fallback for `gh` CLI calls. Used when neither
+          HOLOCRON_READ_TOKEN nor HOLOCRON_SYNC_TOKEN is set.
+        required: false
 
 jobs:
   sync:
@@ -81,8 +91,7 @@ jobs:
             --pr \
             --message "$COMMIT_MSG"
         env:
-          GITHUB_TOKEN: ${{ secrets.HOLOCRON_SYNC_TOKEN }}
-          GH_TOKEN: ${{ secrets.HOLOCRON_SYNC_TOKEN }}
+          GH_TOKEN: ${{ secrets.HOLOCRON_READ_TOKEN || secrets.HOLOCRON_SYNC_TOKEN || secrets.GH_TOKEN }}
           HOLOCRON_SYNC_TOKEN: ${{ secrets.HOLOCRON_SYNC_TOKEN }}
           PRIMARY_REPO: ${{ inputs.primary-repo }}
           SYNC_BRANCH: ${{ inputs.sync-branch }}
@@ -101,8 +110,7 @@ jobs:
               --message "$COMMIT_MSG"
           done
         env:
-          GITHUB_TOKEN: ${{ secrets.HOLOCRON_SYNC_TOKEN }}
-          GH_TOKEN: ${{ secrets.HOLOCRON_SYNC_TOKEN }}
+          GH_TOKEN: ${{ secrets.HOLOCRON_READ_TOKEN || secrets.HOLOCRON_SYNC_TOKEN || secrets.GH_TOKEN }}
           HOLOCRON_SYNC_TOKEN: ${{ secrets.HOLOCRON_SYNC_TOKEN }}
           SECONDARY_REPOS: ${{ inputs.secondary-repos }}
           SYNC_BRANCH: ${{ inputs.sync-branch }}
