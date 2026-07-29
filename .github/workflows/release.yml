@@ -5,10 +5,7 @@
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Release
 
-# Semantic-release with OIDC Trusted Publishing.
-# actions/setup-node writes a default NODE_AUTH_TOKEN=${{ github.token }}
-# which shadows OIDC auth. We explicitly clear it so npm falls through to
-# the Trusted Publisher OIDC exchange.
+# Semantic-release with OIDC Trusted Publishing — no NPM_TOKEN required.
 # The calling repo must have a .releaserc.json that configures branches,
 # plugins, and any publish options. npm@11+ is installed to support OIDC.
 
@@ -121,13 +118,6 @@ jobs:
       - run: pnpm build
         name: Build
         if: ${{ inputs.run-build == true }}
-
-      - name: Clear npm auth token
-        # actions/setup-node may write NODE_AUTH_TOKEN=${{ github.token }} into
-        # the npm config. Setting it empty still leaves an entry npm sees as
-        # "no auth" and skips OIDC. Deleting the config key entirely lets npm
-        # fall through to the Trusted Publisher OIDC exchange.
-        run: npm config delete //registry.npmjs.org/:_authToken 2>/dev/null || true
 
       - run: npx semantic-release
         name: Release
