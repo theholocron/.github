@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-07-29T19:37:56.540Z
+# Synced:  2026-07-29T20:25:36.030Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Release
@@ -98,11 +98,6 @@ jobs:
           git config --global format.signoff true
         env:
           GH_TOKEN: ${{ secrets.HOLOCRON_READ_TOKEN || secrets.GH_TOKEN || github.token }}
-
-      - name: Configure npm global prefix
-        run: |
-          npm config set prefix ~/.npm-global
-          echo "$HOME/.npm-global/bin" >> "$GITHUB_PATH"
 
       - name: Upgrade npm for OIDC support
         run: npm install -g npm@11 sigstore
