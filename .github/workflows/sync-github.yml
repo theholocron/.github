@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-07-31T21:47:53.714Z
+# Synced:  2026-08-01T18:53:46.941Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Sync GitHub Templates
@@ -106,6 +106,8 @@ jobs:
             --branch "$SYNC_BRANCH" \
             --pr \
             --message "$COMMIT_MSG"
+          GH_TOKEN="$HOLOCRON_SYNC_TOKEN" gh pr merge --auto --squash \
+            --repo "$PRIMARY_REPO" "$SYNC_BRANCH" 2>/dev/null || true
         env:
           GH_TOKEN: ${{ secrets.HOLOCRON_READ_TOKEN || secrets.HOLOCRON_SYNC_TOKEN || secrets.GH_TOKEN }}
           HOLOCRON_SYNC_TOKEN: ${{ secrets.HOLOCRON_SYNC_TOKEN }}
@@ -124,6 +126,8 @@ jobs:
               --branch "$SYNC_BRANCH" \
               --pr \
               --message "$COMMIT_MSG"
+            GH_TOKEN="$HOLOCRON_SYNC_TOKEN" gh pr merge --auto --squash \
+              --repo "$repo" "$SYNC_BRANCH" 2>/dev/null || true
           done
         env:
           GH_TOKEN: ${{ secrets.HOLOCRON_READ_TOKEN || secrets.HOLOCRON_SYNC_TOKEN || secrets.GH_TOKEN }}
