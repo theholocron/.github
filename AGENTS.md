@@ -56,7 +56,7 @@ Every generated file begins with:
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
 # Synced:  <timestamp>
 # Tool:    holocron sync-github
-# Changes: edit source in theholocron/holocron and push to alpha or main.
+# Changes: edit source in theholocron/holocron and push to main.
 ```
 
 ## How to update a generated workflow or action
@@ -65,20 +65,13 @@ Every generated file begins with:
 2. Edit `packages/cli/src/templates/index.ts` — workflows are in the `REUSABLE_WORKFLOWS`
    export, actions are in the `ACTIONS` export (the `workflows/` and `actions/` YAML files
    were removed; `index.ts` is the single source of truth)
-3. Push to `alpha` — **this is the active trigger branch right now** (see note below)
+3. Push to `main`
 4. The `sync-github.yml` CI workflow in `holocron` runs `holocron sync-github`,
    opens a PR here on branch `chore/sync-templates`
 5. Review and merge that PR — do not hand-edit the generated files
 
 The sync command validates generated workflows with `actionlint` before
 opening the PR, so CI on the PR should pass cleanly.
-
-> **Note — `alpha` is the current sync trigger, not `main`.**
-> All v2 work in `holocron` lives on `alpha`; `main` still tracks the v1
-> stable line, so syncing from `main` would push stale templates. Once `alpha`
-> is merged to `main` and a stable release is cut, the sync trigger should be
-> flipped to fire on `main` pushes. Tracked in
-> [theholocron/.github#25](https://github.com/theholocron/.github/issues/25).
 
 ## Action pinning — non-negotiable rule
 
@@ -129,13 +122,13 @@ Caller repos call them with `uses: theholocron/.github/.github/workflows/<name>.
 | `test.yml` | push + PR | vitest + Codecov |
 | `typecheck.yml` | push + PR | `pnpm typecheck` (`tsc --noEmit`) |
 | `codeql.yml` | push/PR to main + weekly | CodeQL security scan |
-| `release.yml` | push to main or alpha | semantic-release + OIDC Trusted Publishing |
+| `release.yml` | push to main | semantic-release + OIDC Trusted Publishing |
 | `stale.yml` | daily schedule | marks stale issues/PRs |
 | `greetings.yml` | PR + issues | first-time contributor welcome |
 | `dependencies.yml` | PR | Dependabot semver-patch auto-merge |
 | `bookkeeping-pr.yml` | PR opened/edited | labels PRs from Conventional Commit title |
 | `audit.yml` | push + PR | BundleWatch bundle size |
-| `sync-github.yml` | push to main or alpha in `holocron` | re-generates and PRs these files |
+| `sync-github.yml` | push to main in `holocron` | re-generates and PRs these files |
 
 ## Workflow starter templates (`workflow-templates/`)
 
