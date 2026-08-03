@@ -38,7 +38,7 @@ which writes and maintains these files automatically from `holocron.config.json`
 | `stale.yml` | daily schedule | marks stale issues/PRs |
 | `greetings.yml` | PR + issues | first-time contributor welcome message |
 | `dependencies.yml` | PR | Dependabot auto-merge for semver-patch updates |
-| `bookkeeping-pr.yml` | PR opened/edited | labels PRs from Conventional Commit title (`fix:` → bug, `feat:` → enhancement, etc.) |
+| `bookkeeping.yml` | PR opened/edited | labels PRs from Conventional Commit title (`fix:` → bug, `feat:` → enhancement, etc.) |
 | `audit.yml` | push + PR | BundleWatch bundle size analysis |
 
 Each workflow accepts inputs to customise behaviour — see the workflow files in
@@ -104,7 +104,7 @@ See [theholocron/holocron](https://github.com/theholocron/holocron) for the full
 ## Labels
 
 Every repo in the org uses the same label set, applied and kept in sync by
-`holocron setup`. The `bookkeeping-pr` workflow maps Conventional Commit title
+`holocron setup`. The `bookkeeping` workflow maps Conventional Commit title
 prefixes to these labels automatically.
 
 | Label | Color | Description | Auto-applied from |

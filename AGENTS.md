@@ -126,7 +126,7 @@ Caller repos call them with `uses: theholocron/.github/.github/workflows/<name>.
 | `stale.yml` | daily schedule | marks stale issues/PRs |
 | `greetings.yml` | PR + issues | first-time contributor welcome |
 | `dependencies.yml` | PR | Dependabot semver-patch auto-merge |
-| `bookkeeping-pr.yml` | PR opened/edited | labels PRs from Conventional Commit title |
+| `bookkeeping.yml` | PR opened/edited | labels PRs from Conventional Commit title |
 | `audit.yml` | push + PR | BundleWatch bundle size |
 | `sync-github.yml` | push to main in `holocron` | re-generates and PRs these files |
 
