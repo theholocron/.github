@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-01T19:12:45.133Z
+# Synced:  2026-08-03T15:02:05.001Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Review
@@ -75,6 +75,7 @@ jobs:
         with:
           reporter: github-pr-annotations
           tool_name: "Review / gitleaks"
+          fail_level: error
           gitleaks_flags: --log-opts=${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
 
       - name: YamlLint
@@ -83,6 +84,7 @@ jobs:
         with:
           reporter: github-pr-annotations
           tool_name: "Review / yamllint"
+          fail_level: error
           yamllint_flags: -c ${{ github.workspace }}/yamllint.config.yml ${{ github.workspace }}
 
       - name: ActionLint (GitHub Actions)
@@ -91,6 +93,7 @@ jobs:
         with:
           reporter: github-pr-annotations
           tool_name: "Review / actionlint"
+          fail_level: error
 
       #
       # TypeScript / JavaScript
@@ -102,6 +105,7 @@ jobs:
         with:
           reporter: github-pr-annotations
           tool_name: "Review / eslint"
+          fail_level: error
           eslint_flags: .
 
       - name: TypeScript
@@ -110,6 +114,7 @@ jobs:
         with:
           reporter: github-pr-annotations
           tool_name: "Review / tsc"
+          fail_level: error
 
       #
       # Shell
