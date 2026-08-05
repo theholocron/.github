@@ -3,20 +3,21 @@
 # Synced:  2026-08-05T02:49:19.618Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
-name: Deploy Docs
+name: Deploy Storybook
 
 on: # yamllint disable-line rule:truthy
   workflow_call:
     inputs:
-      name:
-        description: Repo name prefix used to derive package names (<name>-docs, <name>-site)
-        required: true
+      build-script:
+        description: pnpm script that builds the Storybook static output
         type: string
-      use-turbo:
-        description: Build content packages with pnpm turbo build (default true)
         required: false
-        type: boolean
-        default: true
+        default: build:storybook
+      output-dir:
+        description: Directory where Storybook writes its static output
+        type: string
+        required: false
+        default: storybook-static
 
 jobs:
   build:
@@ -31,27 +32,15 @@ jobs:
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
 
-      - name: Build content packages
-        if: ${{ inputs.use-turbo }}
+      - name: Build Storybook
+        run: pnpm run "$BUILD_SCRIPT"
         env:
-          DOCS_NAME: ${{ inputs.name }}
-        run: pnpm turbo build --filter=@theholocron/"$DOCS_NAME"-docs
-
-      - name: Build content packages
-        if: ${{ !inputs.use-turbo }}
-        env:
-          DOCS_NAME: ${{ inputs.name }}
-        run: pnpm --filter @theholocron/"$DOCS_NAME"-docs build
-
-      - name: Build docs site
-        env:
-          DOCS_NAME: ${{ inputs.name }}
-        run: pnpm --filter @theholocron/"$DOCS_NAME"-site build
+          BUILD_SCRIPT: ${{ inputs.build-script }}
 
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         name: Upload pages artifact
         with:
-          path: docs/dist
+          path: ${{ inputs.output-dir }}
 
   deploy:
     name: Deploy
