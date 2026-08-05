@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-05T05:09:11.496Z
+# Synced:  2026-08-05T18:30:38.067Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Dependencies
@@ -23,9 +23,6 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    concurrency:
-      group: dependencies-${{ github.event.pull_request.number }}
-      cancel-in-progress: true
     if: github.event.pull_request.user.login == 'dependabot[bot]'
     steps:
       - uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
