@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-05T02:49:19.618Z
+# Synced:  2026-08-05T03:36:30.435Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Test
@@ -14,7 +14,7 @@ on: # yamllint disable-line rule:truthy
         required: false
         default: false
       run-interaction:
-        description: Run Storybook interaction tests in a full Playwright container
+        description: Run Storybook interaction and accessibility tests with Playwright
         type: boolean
         required: false
         default: false
@@ -139,10 +139,6 @@ jobs:
       contents: read
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    container:
-      # Make sure to grab the latest version of the Playwright image.
-      # https://playwright.dev/docs/docker#pull-the-image
-      image: mcr.microsoft.com/playwright:v1.54.1-noble
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
@@ -152,6 +148,9 @@ jobs:
 
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
+
+      - run: pnpm exec playwright install --with-deps
+        name: Install Playwright
 
       - run: pnpm test:storybook
         name: Run interaction and accessibility tests
