@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-06T02:49:31.357Z
+# Synced:  2026-08-06T04:03:51.989Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Lint
@@ -142,8 +142,8 @@ jobs:
           VALIDATE_JSX_PRETTIER: true
           VALIDATE_MARKDOWN_PRETTIER: true
           VALIDATE_TSX: true
-          VALIDATE_TYPESCRIPT_PRETTIER: true
           VALIDATE_CSS: true
+          VALIDATE_TYPESCRIPT_PRETTIER: true
           VALIDATE_YAML: true
           YAML_CONFIG_FILE: ${{ inputs.yaml-config }}
           STYLELINT_CONFIG_FILE: stylelint.config.ts
