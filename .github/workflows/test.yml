@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-06T04:03:51.989Z
+# Synced:  2026-08-07T05:26:40.686Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Test
@@ -42,16 +42,6 @@ on: # yamllint disable-line rule:truthy
         required: false
 
 jobs:
-  validate:
-    name: Validate — at least one test type must be enabled
-    if: ${{ !inputs.run-unit && !inputs.run-storybook }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Fail — set run-unit or run-storybook to true
-        run: |
-          echo "::error::At least one of run-unit or run-storybook must be true. Library repos use run-unit: true; UI/Storybook repos use run-storybook: true."
-          exit 1
-
   unit:
     name: Run tests and collect coverage
     if: ${{ inputs.run-unit }}
