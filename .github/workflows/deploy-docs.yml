@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-09T20:23:11.086Z
+# Synced:  2026-08-10T22:12:16.695Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Deploy Docs
@@ -17,6 +17,11 @@ on: # yamllint disable-line rule:truthy
         required: false
         type: boolean
         default: true
+      skip-content:
+        description: Skip the content package build step (for repos with no <name>-docs package)
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   build:
@@ -32,13 +37,13 @@ jobs:
         name: Setup
 
       - name: Build content packages
-        if: ${{ inputs.use-turbo }}
+        if: ${{ !inputs.skip-content && inputs.use-turbo }}
         env:
           DOCS_NAME: ${{ inputs.name }}
         run: pnpm turbo build --filter=@theholocron/"$DOCS_NAME"-docs
 
       - name: Build content packages
-        if: ${{ !inputs.use-turbo }}
+        if: ${{ !inputs.skip-content && !inputs.use-turbo }}
         env:
           DOCS_NAME: ${{ inputs.name }}
         run: pnpm --filter @theholocron/"$DOCS_NAME"-docs build
