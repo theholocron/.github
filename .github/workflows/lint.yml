@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-11T17:16:47.431Z
+# Synced:  2026-08-11T17:38:58.891Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Lint
@@ -25,13 +25,6 @@ on: # yamllint disable-line rule:truthy
         type: string
         required: false
         default: prettier.config.ts
-      typescript-tsconfig:
-        description: >
-          tsconfig.json path passed to TYPESCRIPT_STANDARD_TSCONFIG_FILE.
-          Defaults to tsconfig.json (super-linter's own default).
-        type: string
-        required: false
-        default: tsconfig.json
       yaml-config:
         description: >
           Filename for the yamllint config. Defaults to yamllint.config.yml.
@@ -187,7 +180,6 @@ jobs:
           JAVASCRIPT_ES_CONFIG_FILE: ${{ steps.detect.outputs.eslint == 'true' && inputs.eslint-config || '' }}
           TYPESCRIPT_ES_CONFIG_FILE: ${{ steps.detect.outputs.eslint == 'true' && inputs.eslint-config || '' }}
           PRETTIER_CONFIG: ${{ inputs.prettier-config }}
-          TYPESCRIPT_STANDARD_TSCONFIG_FILE: ${{ inputs.typescript-tsconfig }}
           YAML_CONFIG_FILE: ${{ inputs.yaml-config }}
           # Always-on linters
           FIX_MARKDOWN_PRETTIER: true
