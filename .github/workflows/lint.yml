@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-10T22:12:16.695Z
+# Synced:  2026-08-11T17:16:47.431Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Lint
@@ -109,6 +109,8 @@ jobs:
 
       - name: Detect project features
         # Writes VALIDATE_*/FIX_* to GITHUB_ENV only when the feature exists.
+        # Also writes step outputs for values referenced in expression context
+        # (GITHUB_ENV is not readable via steps.*.outputs — they need GITHUB_OUTPUT).
         # All values written are hardcoded 'true' — no user input in the script.
         # Config file paths (inputs.*) stay in GH Actions expression context in
         # the super-linter env: block below, never shell-evaluated (CWE-78).
@@ -116,35 +118,53 @@ jobs:
         run: |
           has() { find . -not -path '*/node_modules/*' -name "$1" -print -quit 2>/dev/null | grep -q .; }
 
+          if { has 'eslint.config.ts' || has 'eslint.config.mjs' || has 'eslint.config.js' || has '.eslintrc.json' || has '.eslintrc.yml'; }; then
+            {
+              echo "VALIDATE_JAVASCRIPT_ES=true"
+              echo "VALIDATE_TYPESCRIPT_ES=true"
+            } >> "$GITHUB_ENV"
+            echo "eslint=true" >> "$GITHUB_OUTPUT"
+          fi
+
           if { has '*.js' || has '*.jsx' || has '*.mjs' || has '*.cjs' || has '*.ts' || has '*.tsx'; }; then
-            echo "VALIDATE_JAVASCRIPT_PRETTIER=true" >> "$GITHUB_ENV"
-            echo "VALIDATE_JSX_PRETTIER=true" >> "$GITHUB_ENV"
-            echo "VALIDATE_TYPESCRIPT_PRETTIER=true" >> "$GITHUB_ENV"
-            echo "VALIDATE_TSX=true" >> "$GITHUB_ENV"
-            echo "FIX_JAVASCRIPT_PRETTIER=true" >> "$GITHUB_ENV"
-            echo "FIX_JSX_PRETTIER=true" >> "$GITHUB_ENV"
-            echo "FIX_TYPESCRIPT_PRETTIER=true" >> "$GITHUB_ENV"
-            echo "FIX_TSX=true" >> "$GITHUB_ENV"
+            {
+              echo "VALIDATE_JAVASCRIPT_PRETTIER=true"
+              echo "VALIDATE_JSX_PRETTIER=true"
+              echo "VALIDATE_TYPESCRIPT_PRETTIER=true"
+              echo "VALIDATE_TSX=true"
+              echo "FIX_JAVASCRIPT_PRETTIER=true"
+              echo "FIX_JSX_PRETTIER=true"
+              echo "FIX_TYPESCRIPT_PRETTIER=true"
+              echo "FIX_TSX=true"
+            } >> "$GITHUB_ENV"
           fi
 
           if { has '*.css' || has '*.scss' || has 'stylelint.config.ts' || has 'stylelint.config.mjs' || has 'stylelint.config.js'; }; then
-            echo "VALIDATE_CSS=true" >> "$GITHUB_ENV"
-            echo "STYLELINT_CONFIG_FILE=stylelint.config.ts" >> "$GITHUB_ENV"
+            {
+              echo "VALIDATE_CSS=true"
+              echo "STYLELINT_CONFIG_FILE=stylelint.config.ts"
+            } >> "$GITHUB_ENV"
           fi
 
           if { has '*.graphql' || has '*.gql'; }; then
-            echo "VALIDATE_GRAPHQL_PRETTIER=true" >> "$GITHUB_ENV"
-            echo "FIX_GRAPHQL_PRETTIER=true" >> "$GITHUB_ENV"
+            {
+              echo "VALIDATE_GRAPHQL_PRETTIER=true"
+              echo "FIX_GRAPHQL_PRETTIER=true"
+            } >> "$GITHUB_ENV"
           fi
 
           if { has '*.html' || has '*.htm'; }; then
-            echo "VALIDATE_HTML_PRETTIER=true" >> "$GITHUB_ENV"
-            echo "FIX_HTML_PRETTIER=true" >> "$GITHUB_ENV"
+            {
+              echo "VALIDATE_HTML_PRETTIER=true"
+              echo "FIX_HTML_PRETTIER=true"
+            } >> "$GITHUB_ENV"
           fi
 
           if { has '.env' || has '.env.example' || has '.env.local'; }; then
-            echo "VALIDATE_ENV=true" >> "$GITHUB_ENV"
-            echo "FIX_ENV=true" >> "$GITHUB_ENV"
+            {
+              echo "VALIDATE_ENV=true"
+              echo "FIX_ENV=true"
+            } >> "$GITHUB_ENV"
           fi
 
           if { has 'Dockerfile' || has '*.Dockerfile'; }; then
