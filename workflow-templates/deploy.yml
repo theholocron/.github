@@ -1,28 +1,25 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/cli/src/commands/setup-workflows.ts
+# Tool:    holocron sync-github
+# Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Deploy
 
 on: # yamllint disable-line rule:truthy
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  github-pages:
-    name: Publish Storybook to GitHub Pages
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
-        id: deploy-github-pages
-        name: Publish Storybook to GitHub Pages
-        with:
-          build_command: npm run build:storybook -- --output-dir=docs
-          install_command: npm ci
-          path: docs
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy-github-pages.outputs.page_url }}
+  deploy:
+    name: Deploy
+    uses: theholocron/.github/.github/workflows/deploy.yml@main
+    secrets: inherit
