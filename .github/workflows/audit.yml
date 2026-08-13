@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-13T18:20:07.280Z
+# Synced:  2026-08-13T18:38:57.712Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Audit
@@ -26,10 +26,10 @@ on: # yamllint disable-line rule:truthy
       lighthouse-config:
         description: >
           Path to the Lighthouse CI config file passed as --config to lhci autorun.
-          Defaults to lighthouse.config.js (the org standard).
+          Defaults to lighthouse.config.cjs (the org standard).
         type: string
         required: false
-        default: lighthouse.config.js
+        default: lighthouse.config.cjs
       knip-script:
         description: Script that invokes Knip (must exit non-zero on findings)
         type: string
