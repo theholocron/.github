@@ -4,7 +4,7 @@
   "repo": {
     "name": "theholocron/.github",
     "teams": [{ "slug": "gatekeepers", "permission": "maintain" }],
-    "protection": "balanced",
+    "protection": "strict",
     "topics": ["github-actions", "github-config", "reusable-workflows"],
     "properties": {
       "lifecycle": "active",
