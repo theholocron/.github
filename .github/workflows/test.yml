@@ -119,6 +119,8 @@ jobs:
       - run: pnpm exec playwright install chromium --with-deps
         name: Install Playwright
         if: steps.playwright-cache.outputs.cache-hit != 'true'
+        env:
+          DEBIAN_FRONTEND: noninteractive
 
       # ubuntu-24.04 ships with Chromium system dependencies — skip apt on cache hit
 
@@ -196,6 +198,8 @@ jobs:
       - run: pnpm exec playwright install chromium --with-deps
         name: Install Playwright
         if: steps.playwright-cache.outputs.cache-hit != 'true'
+        env:
+          DEBIAN_FRONTEND: noninteractive
 
       # ubuntu-24.04 ships with Chromium system dependencies — skip apt on cache hit
 
