@@ -120,9 +120,7 @@ jobs:
         name: Install Playwright
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
-      - run: pnpm exec playwright install-deps chromium
-        name: Install Playwright system dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
+      # ubuntu-24.04 ships with Chromium system dependencies — skip apt on cache hit
 
       - run: pnpm test:storybook
         name: Run Storybook tests
@@ -199,9 +197,7 @@ jobs:
         name: Install Playwright
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
-      - run: pnpm exec playwright install-deps chromium
-        name: Install Playwright system dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
+      # ubuntu-24.04 ships with Chromium system dependencies — skip apt on cache hit
 
       - run: pnpm test:storybook
         name: Run interaction and accessibility tests
