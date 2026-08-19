@@ -116,13 +116,11 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-chromium-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-      - run: pnpm exec playwright install chromium --with-deps
+      - run: pnpm exec playwright install chromium
         name: Install Playwright
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        env:
-          DEBIAN_FRONTEND: noninteractive
 
-      # ubuntu-24.04 ships with Chromium system dependencies — skip apt on cache hit
+      # ubuntu-24.04 ships with Chromium system dependencies; no --with-deps needed
 
       - run: pnpm test:storybook
         name: Run Storybook tests
@@ -195,13 +193,11 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-chromium-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-      - run: pnpm exec playwright install chromium --with-deps
+      - run: pnpm exec playwright install chromium
         name: Install Playwright
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        env:
-          DEBIAN_FRONTEND: noninteractive
 
-      # ubuntu-24.04 ships with Chromium system dependencies — skip apt on cache hit
+      # ubuntu-24.04 ships with Chromium system dependencies; no --with-deps needed
 
       - run: pnpm test:storybook
         name: Run interaction and accessibility tests
