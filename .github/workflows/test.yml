@@ -195,11 +195,11 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-chromium-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-      - run: pnpm exec playwright install --with-deps
+      - run: pnpm exec playwright install chromium --with-deps
         name: Install Playwright
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
-      - run: pnpm exec playwright install-deps
+      - run: pnpm exec playwright install-deps chromium
         name: Install Playwright system dependencies
         if: steps.playwright-cache.outputs.cache-hit == 'true'
 
