@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-20T00:56:46.598Z
+# Synced:  2026-08-20T04:53:20.330Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Deploy
@@ -19,9 +19,10 @@ on: # yamllint disable-line rule:truthy
         default: ""
       storybook-projects:
         description: >
-          JSON array of { "name", "workingDir", "outputDir"? } objects for monorepo multi-storybook
-          deploys. Each is built via `pnpm -C <workingDir> build:storybook` and assembled under
-          `sandbox/<name>/` alongside docs in a single deployment.
+          JSON array of { "name"?, "workingDir", "outputDir"? } objects for storybook deploys.
+          Each is built via `pnpm -C <workingDir> build:storybook`. If "name" is provided the
+          output is placed under `sandbox/<name>/`; omit "name" for single-repo deploys and the
+          output lands directly in `sandbox/`.
         type: string
         required: false
         default: "[]"
@@ -92,11 +93,16 @@ jobs:
           fi
           if [ "$PROJECTS" != "[]" ]; then
             echo "$PROJECTS" | jq -c '.[]' | while IFS= read -r project; do
-              name=$(echo "$project" | jq -r '.name')
+              name=$(echo "$project" | jq -r '.name // ""')
               workingDir=$(echo "$project" | jq -r '.workingDir')
               outputDir=$(echo "$project" | jq -r '.outputDir // "storybook-static"')
-              mkdir -p "_site/sandbox/${name}"
-              cp -r "${workingDir}/${outputDir}/." "_site/sandbox/${name}/"
+              if [ -n "$name" ]; then
+                target="_site/sandbox/${name}"
+              else
+                target="_site/sandbox"
+              fi
+              mkdir -p "$target"
+              cp -r "${workingDir}/${outputDir}/." "$target/"
             done
           elif [ "$DEPLOY_TYPE" = "storybook" ]; then
             mkdir -p _site/sandbox
