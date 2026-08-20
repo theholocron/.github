@@ -49,7 +49,13 @@ on: # yamllint disable-line rule:truthy
         type: string
         required: false
         default: "http://localhost:5173"
-    secrets: inherit
+    secrets:
+      CHROMATIC_PROJECT_TOKEN:
+        required: false
+      CYPRESS_RECORD_KEY:
+        required: false
+      TURBO_TOKEN:
+        required: false
 
 jobs:
   unit:
