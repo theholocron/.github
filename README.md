@@ -39,7 +39,8 @@ which writes and maintains these files automatically from `holocron.config.json`
 | `release.yml` | push to main | semantic-release + OIDC Trusted Publishing (no `NPM_TOKEN` needed) |
 | `review.yml` | PR only | ReviewDog annotation layer — ESLint, tsc, ShellCheck, Hadolint, ActionLint, Gitleaks, YamlLint, dotenv-linter, Alex |
 | `stale.yml` | daily schedule | marks stale issues/PRs |
-| `sync-broadcast.yml` | `workflow_dispatch` | discovers all repos with `sync.yml` via GitHub API and fans out a dispatch; triggered by `post-release.yml` in `docs` |
+| `post-release.yml` | `workflow_call` | dispatches `sync-broadcast.yml` with `steps=readme`; opt-in for repos that release packages other repos depend on via registry-doc |
+| `sync-broadcast.yml` | `workflow_dispatch` | discovers all repos with `sync.yml` via GitHub API and fans out a dispatch |
 | `sync-github.yml` | push to main/alpha in `holocron` | re-generates and PRs these files |
 | `sync.yml` | `workflow_call` | runs `holocron sync` with optional `--steps`, auto-commits, opens PR |
 | `test.yml` | push + PR | vitest + Codecov; optional Storybook, Chromatic, Cypress, Playwright jobs |
