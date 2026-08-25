@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-25T20:55:36.273Z
+# Synced:  2026-08-25T22:37:46.226Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Sync GitHub Templates
@@ -11,6 +11,7 @@ name: Sync GitHub Templates
 #
 # Secrets required:
 #   HOLOCRON_SYNC_TOKEN — fine-grained PAT (resource owner: org) with:
+#                  Actions:       Read and write  (dispatch workflow runs via gh workflow run)
 #                  Contents:      Read and write  (git trees, blobs, refs)
 #                  Pull requests: Read and write  (open sync PR)
 #                  Workflows:     Read and write  (write .github/workflows/*.yml)
