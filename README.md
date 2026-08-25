@@ -29,17 +29,21 @@ which writes and maintains these files automatically from `holocron.config.json`
 
 | Workflow | Trigger | Purpose |
 |---|---|---|
-| `lint.yml` | push + PR | super-linter CI gate — Prettier, YAML, ESLint configs, Gitleaks, ActionLint |
-| `test.yml` | push + PR | vitest + Codecov coverage upload |
-| `typecheck.yml` | push + PR | `pnpm typecheck` (`tsc --noEmit`) |
-| `codeql.yml` | push/PR to main + weekly | CodeQL security scan (javascript-typescript) |
-| `review.yml` | PR only | ReviewDog annotation layer — ESLint, tsc, ShellCheck, Hadolint, ActionLint, Gitleaks, YamlLint, dotenv-linter, Alex |
-| `release.yml` | push to main | semantic-release + OIDC Trusted Publishing (no `NPM_TOKEN` needed) |
-| `stale.yml` | daily schedule | marks stale issues/PRs |
-| `greetings.yml` | PR + issues | first-time contributor welcome message |
-| `dependencies.yml` | PR | Dependabot auto-merge for semver-patch updates |
+| `audit.yml` | push + PR | BundleWatch bundle size + Knip unused-export analysis |
 | `bookkeeping.yml` | PR opened/edited | labels PRs from Conventional Commit title (`fix:` → bug, `feat:` → enhancement, etc.) |
-| `audit.yml` | push + PR | BundleWatch bundle size analysis |
+| `codeql.yml` | push/PR to main + weekly | CodeQL security scan (javascript-typescript) |
+| `dependencies.yml` | PR | Dependabot auto-merge for semver-patch updates |
+| `deploy.yml` | push to main | Astro/Storybook site deploy (Cloudflare Pages) |
+| `greetings.yml` | PR + issues | first-time contributor welcome message |
+| `lint.yml` | push + PR | super-linter CI gate — Prettier, YAML, ESLint configs, Gitleaks, ActionLint |
+| `release.yml` | push to main | semantic-release + OIDC Trusted Publishing (no `NPM_TOKEN` needed) |
+| `review.yml` | PR only | ReviewDog annotation layer — ESLint, tsc, ShellCheck, Hadolint, ActionLint, Gitleaks, YamlLint, dotenv-linter, Alex |
+| `stale.yml` | daily schedule | marks stale issues/PRs |
+| `sync-broadcast.yml` | `workflow_dispatch` | discovers all repos with `sync.yml` via GitHub API and fans out a dispatch; triggered by `post-release.yml` in `docs` |
+| `sync-github.yml` | push to main/alpha in `holocron` | re-generates and PRs these files |
+| `sync.yml` | `workflow_call` | runs `holocron sync` with optional `--steps`, auto-commits, opens PR |
+| `test.yml` | push + PR | vitest + Codecov; optional Storybook, Chromatic, Cypress, Playwright jobs |
+| `typecheck.yml` | push + PR | `pnpm typecheck` (`tsc --noEmit`) |
 
 Each workflow accepts inputs to customise behaviour — see the workflow files in
 `.github/workflows/` for the full input/secret declarations.
@@ -54,9 +58,10 @@ Reusable action steps callable from any workflow:
 
 | Action | Purpose |
 |---|---|
+| `auto-commit` | Commit + push file changes to a branch; outputs `changes-detected` |
+| `install` | `pnpm install --frozen-lockfile` |
 | `setup` | Orchestrates `setup-node` + `install` in one step |
 | `setup-node` | pnpm + Node 22 with pnpm dependency caching |
-| `install` | `pnpm install --frozen-lockfile` |
 
 ## Workflow starter templates
 

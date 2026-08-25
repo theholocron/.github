@@ -102,33 +102,39 @@ When adding a new third-party action:
 
 ## Composite actions (`.github/actions/`)
 
-Three actions exist. All are generated; edit the templates in `holocron` to change them.
+Four actions exist. All are generated; edit the templates in `holocron` to change them.
 
 | Action | Purpose | Call |
 |---|---|---|
+| `auto-commit` | Commit + push file changes to a branch; outputs `changes-detected` | `theholocron/.github/.github/actions/auto-commit@main` |
+| `install` | `pnpm install --frozen-lockfile` | `theholocron/.github/.github/actions/install@main` |
 | `setup` | Runs `setup-node` + `install` | `theholocron/.github/.github/actions/setup@main` |
 | `setup-node` | pnpm + Node 22 + pnpm cache | `theholocron/.github/.github/actions/setup-node@main` |
-| `install` | `pnpm install --frozen-lockfile` | `theholocron/.github/.github/actions/install@main` |
 
 ## Reusable workflows (`.github/workflows/`)
 
-All workflows use `on: workflow_call` — they are not triggered directly.
-Caller repos call them with `uses: theholocron/.github/.github/workflows/<name>.yml@main`.
+Most workflows use `on: workflow_call` and are called with
+`uses: theholocron/.github/.github/workflows/<name>.yml@main`.
+`sync-broadcast.yml` uses `on: workflow_dispatch` instead — it is dispatched
+programmatically, not called via `workflow_call`.
 
-| Workflow | Triggered by callers on | Purpose |
+| Workflow | Trigger / call | Purpose |
 |---|---|---|
-| `lint.yml` | push + PR | super-linter CI gate: Prettier, YAML, ESLint, Gitleaks, ActionLint |
-| `review.yml` | PR only | ReviewDog inline annotations: ESLint, tsc, ShellCheck, Hadolint, etc. |
-| `test.yml` | push + PR | vitest + Codecov |
-| `typecheck.yml` | push + PR | `pnpm typecheck` (`tsc --noEmit`) |
-| `codeql.yml` | push/PR to main + weekly | CodeQL security scan |
-| `release.yml` | push to main | semantic-release + OIDC Trusted Publishing |
-| `stale.yml` | daily schedule | marks stale issues/PRs |
-| `greetings.yml` | PR + issues | first-time contributor welcome |
-| `dependencies.yml` | PR | Dependabot semver-patch auto-merge |
+| `audit.yml` | push + PR | BundleWatch bundle size + Knip unused-export analysis |
 | `bookkeeping.yml` | PR opened/edited | labels PRs from Conventional Commit title |
-| `audit.yml` | push + PR | BundleWatch bundle size |
-| `sync-github.yml` | push to main in `holocron` | re-generates and PRs these files |
+| `codeql.yml` | push/PR to main + weekly | CodeQL security scan |
+| `dependencies.yml` | PR | Dependabot semver-patch auto-merge |
+| `deploy.yml` | push to main | Astro/Storybook site deploy (Cloudflare Pages) |
+| `greetings.yml` | PR + issues | first-time contributor welcome |
+| `lint.yml` | push + PR | super-linter CI gate: Prettier, YAML, ESLint, Gitleaks, ActionLint |
+| `release.yml` | push to main | semantic-release + OIDC Trusted Publishing |
+| `review.yml` | PR only | ReviewDog inline annotations: ESLint, tsc, ShellCheck, Hadolint, etc. |
+| `stale.yml` | daily schedule | marks stale issues/PRs |
+| `sync-broadcast.yml` | `workflow_dispatch` | discovers all repos with `sync.yml` via GitHub API and dispatches `workflow_dispatch` to each; used by `post-release.yml` in `docs` |
+| `sync-github.yml` | push to main/alpha in `holocron` | re-generates and PRs these files |
+| `sync.yml` | `workflow_call` | runs `holocron sync` with optional `--steps`, auto-commits changes, opens a PR |
+| `test.yml` | push + PR | vitest + Codecov; optional Storybook, Chromatic, Cypress, Playwright jobs |
+| `typecheck.yml` | push + PR | `pnpm typecheck` (`tsc --noEmit`) |
 
 ## Workflow starter templates (`workflow-templates/`)
 
