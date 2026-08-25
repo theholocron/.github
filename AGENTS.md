@@ -130,7 +130,8 @@ programmatically, not called via `workflow_call`.
 | `release.yml` | push to main | semantic-release + OIDC Trusted Publishing |
 | `review.yml` | PR only | ReviewDog inline annotations: ESLint, tsc, ShellCheck, Hadolint, etc. |
 | `stale.yml` | daily schedule | marks stale issues/PRs |
-| `sync-broadcast.yml` | `workflow_dispatch` | discovers all repos with `sync.yml` via GitHub API and dispatches `workflow_dispatch` to each; used by `post-release.yml` in `docs` |
+| `post-release.yml` | `workflow_call` | dispatches `sync-broadcast.yml` with `steps=readme`; opt-in for repos that release packages consumed by other repos via registry-doc |
+| `sync-broadcast.yml` | `workflow_dispatch` | discovers all repos with `sync.yml` via GitHub API and dispatches `workflow_dispatch` to each |
 | `sync-github.yml` | push to main/alpha in `holocron` | re-generates and PRs these files |
 | `sync.yml` | `workflow_call` | runs `holocron sync` with optional `--steps`, auto-commits changes, opens a PR |
 | `test.yml` | push + PR | vitest + Codecov; optional Storybook, Chromatic, Cypress, Playwright jobs |
