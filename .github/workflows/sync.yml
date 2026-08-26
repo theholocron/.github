@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-25T22:37:46.226Z
+# Synced:  2026-08-26T04:24:56.836Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Sync
@@ -16,6 +16,11 @@ on: # yamllint disable-line rule:truthy
         type: string
         required: false
     secrets:
+      HOLOCRON_ADMIN_TOKEN:
+        description: >
+          Fine-grained PAT with admin scopes (labels, properties, teams, branch
+          protection). Required when running steps other than readme.
+        required: false
       HOLOCRON_SYNC_TOKEN:
         required: false
       GH_TOKEN:
@@ -50,6 +55,7 @@ jobs:
             pnpm exec holocron sync
           fi
         env:
+          HOLOCRON_ADMIN_TOKEN: ${{ secrets.HOLOCRON_ADMIN_TOKEN }}
           HOLOCRON_SYNC_TOKEN: ${{ secrets.HOLOCRON_SYNC_TOKEN }}
           STEPS: ${{ inputs.steps }}
 
