@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-26T18:00:06.960Z
+# Synced:  2026-08-26T19:33:34.975Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Sync
@@ -80,6 +80,7 @@ jobs:
           token: ${{ secrets.HOLOCRON_SYNC_TOKEN || secrets.GH_TOKEN || github.token }}
           branch: chore/auto-sync
           commit-message: "chore: sync from holocron.config"
+          commit-options: "--no-verify"
 
       - name: Open PR if changes were committed
         if: steps.auto-commit.outputs.changes-detected == 'true'
