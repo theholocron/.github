@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-26T05:59:18.064Z
+# Synced:  2026-08-26T18:00:06.960Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Test
@@ -71,7 +71,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
 
       - uses: theholocron/.github/.github/actions/setup@main
@@ -104,7 +104,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
 
       - uses: theholocron/.github/.github/actions/setup@main
@@ -140,7 +140,7 @@ jobs:
       statuses: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
         with:
           fetch-depth: 0
@@ -148,7 +148,7 @@ jobs:
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
 
-      - uses: chromaui/action@534eebfc19023579541d106f7b61d5ad70ed65c7 # v18
+      - uses: chromaui/action@14cfaef73576e69f95f47f60058063f46ca38719 # v18
         name: Publish to Chromatic
         with:
           projectToken: ${{ (matrix.project.tokenName == 'default' || matrix.project.tokenName == '') && secrets.CHROMATIC_PROJECT_TOKEN || secrets[format('CHROMATIC_PROJECT_TOKEN_{0}', matrix.project.tokenName)] }}
@@ -171,7 +171,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
 
       - uses: theholocron/.github/.github/actions/setup@main
@@ -198,7 +198,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
 
       - uses: theholocron/.github/.github/actions/setup@main
@@ -207,7 +207,7 @@ jobs:
       - run: pnpm exec cypress install
         name: Install Cypress binary
 
-      - uses: cypress-io/github-action@09090944bd8aaa2a517cefb6e38bf1aae336b42b # v7.4.3
+      - uses: cypress-io/github-action@1052aa98bbbe4f55210f844878213c07d9c8c399 # v6.7.13
         name: Cypress run
         with:
           start: pnpm dev

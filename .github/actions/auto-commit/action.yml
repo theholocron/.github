@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-26T05:59:18.064Z
+# Synced:  2026-08-26T18:00:06.960Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Auto Commit
@@ -60,6 +60,15 @@ runs:
         git remote set-url origin "$AUTHED_URL"
       env:
         TOKEN: ${{ inputs.token }}
+
+    - name: Ensure branch exists
+      if: ${{ inputs.branch != '' }}
+      shell: bash
+      run: |
+        git fetch origin "$BRANCH" 2>/dev/null && git checkout "$BRANCH" \
+          || git checkout -b "$BRANCH"
+      env:
+        BRANCH: ${{ inputs.branch }}
 
     - uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
       id: commit
