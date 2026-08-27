@@ -3,9 +3,18 @@
   "description": "Org-level community health files, reusable CI workflows, and workflow templates.",
   "repo": {
     "name": "theholocron/.github",
-    "teams": [{ "slug": "gatekeepers", "permission": "maintain" }],
+    "teams": [
+      {
+        "slug": "gatekeepers",
+        "permission": "maintain"
+      }
+    ],
     "protection": "strict",
-    "topics": ["github-actions", "github-config", "reusable-workflows"],
+    "topics": [
+      "github-actions",
+      "github-config",
+      "reusable-workflows"
+    ],
     "properties": {
       "lifecycle": "active",
       "open_source": true,
@@ -16,5 +25,8 @@
   "providers": {
     "source": "github"
   },
-  "agent": "claude"
+  "agent": "claude",
+  "workflows": [
+    "tag"
+  ]
 }
