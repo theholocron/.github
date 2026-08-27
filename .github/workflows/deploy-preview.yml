@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-27T23:08:21.526Z
+# Synced:  2026-08-27T23:27:14.305Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Deploy Preview
@@ -132,6 +132,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          packageManager: npm
           command: >-
             pages deploy _site
             --project-name ${{ inputs.cloudflare-project || vars.CLOUDFLARE_PAGES_PROJECT }}
