@@ -3,7 +3,7 @@
 # Synced:  2026-08-27T16:45:04.635Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
-name: Deploy
+name: Deploy Preview
 
 on: # yamllint disable-line rule:truthy
   workflow_call:
@@ -36,18 +36,22 @@ on: # yamllint disable-line rule:truthy
         type: string
         required: false
         default: storybook-static
+      cloudflare-project:
+        description: >
+          Cloudflare Pages project name. Falls back to the CLOUDFLARE_PAGES_PROJECT
+          org variable when omitted — set that variable once and all repos get previews
+          without per-repo config.
+        required: false
+        type: string
+        default: ""
 
 jobs:
-  deploy:
-    name: Deploy
+  deploy-preview:
+    name: Deploy Preview
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      pull-requests: write
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
@@ -109,11 +113,16 @@ jobs:
             cp -r "${STORYBOOK_OUTPUT_DIR}/." _site/sandbox/
           fi
 
-      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
-        name: Upload pages artifact
+      - uses: cloudflare/pages-action@f0a1cd58cd66095dee69bfa18fa5efd1dde93bca # v1.5.0
+        name: Deploy to Cloudflare Pages
+        # Skip when neither the per-repo input nor the org variable is set.
+        if: ${{ inputs.cloudflare-project != '' || vars.CLOUDFLARE_PAGES_PROJECT != '' }}
         with:
-          path: _site
-
-      - uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
-        id: deployment
-        name: Deploy to GitHub Pages
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ inputs.cloudflare-project || vars.CLOUDFLARE_PAGES_PROJECT }}
+          directory: _site
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          # Branch name scoped to repo+PR so the wildcard custom domain
+          # *.preview.theholocron.dev resolves to <repo>-pr-<n>.preview.theholocron.dev
+          branch: ${{ github.event.repository.name }}-pr-${{ github.event.pull_request.number }}
