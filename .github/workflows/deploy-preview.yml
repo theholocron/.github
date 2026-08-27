@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-27T22:06:00.414Z
+# Synced:  2026-08-27T22:37:23.183Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Deploy Preview
@@ -145,7 +145,7 @@ jobs:
           PROJECT: ${{ inputs.cloudflare-project || vars.CLOUDFLARE_PAGES_PROJECT }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
-          PREVIEW_URL="https://${ALIAS}${SITE_NAME:+/${SITE_NAME}}/"
+          PREVIEW_URL="${ALIAS%/}${SITE_NAME:+/${SITE_NAME}}/"
           # Create a GitHub Deployment pointing at the stable branch alias URL.
           PAYLOAD=$(printf '{"ref":"%s","environment":"%s","description":"Cloudflare Pages","production_environment":false,"auto_merge":false,"required_contexts":[]}' \
             "$GITHUB_SHA" "${PROJECT} (Preview)")
