@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-28T00:13:58.886Z
+# Synced:  2026-08-28T20:32:24.066Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Test
@@ -217,3 +217,18 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+  conclusion:
+    name: Conclusion
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [unit, storybook, visual-and-composition, interaction-and-accessibility, user-flow]
+    steps:
+      - name: Check job statuses
+        run: |
+          if [[ "$RESULTS" == *"failure"* ]] || [[ "$RESULTS" == *"cancelled"* ]]; then
+            exit 1
+          fi
+        env:
+          RESULTS: ${{ join(needs.*.result, ',') }}
