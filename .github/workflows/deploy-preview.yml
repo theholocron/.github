@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-27T23:27:14.305Z
+# Synced:  2026-08-28T00:13:58.886Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Deploy Preview
@@ -123,6 +123,15 @@ jobs:
             mkdir -p _site/sandbox
             cp -r "${STORYBOOK_OUTPUT_DIR}/." _site/sandbox/
           fi
+
+      - name: Install Wrangler
+        # The action's install step runs npm/pnpm in the repo root; pnpm fails
+        # because it rejects adding to a workspace root without -w, and npm fails
+        # because package.json contains pnpm catalog: references it cannot parse.
+        # Pre-installing from /tmp (no package.json) lets the action find wrangler
+        # already on PATH and skip its own install entirely.
+        working-directory: /tmp
+        run: npm install -g wrangler@4
 
       - uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4.0.0
         id: deploy
