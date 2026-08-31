@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.1](https://github.com/theholocron/.github/compare/v3.1.0...v3.1.1) (2026-08-31)
+
+
+### Bug Fixes
+
+* 🐛 add DCO probot config to allow remediation commits ([#177](https://github.com/theholocron/.github/issues/177)) ([477edb4](https://github.com/theholocron/.github/commit/477edb406123b091468699324afcf6450dd5b109))
+
 ## [3.1.0](https://github.com/theholocron/.github/compare/v3.0.0...v3.1.0) (2026-08-27)
 
 
