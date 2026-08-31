@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-31T05:39:27.504Z
+# Synced:  2026-08-31T17:35:56.015Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Lint
@@ -191,6 +191,19 @@ jobs:
           VALIDATE_GITLEAKS: true
           VALIDATE_MARKDOWN_PRETTIER: true
           VALIDATE_YAML: true
+
+      - name: Validate ADR and spec frontmatter
+        if: hashFiles('scripts/validate-adrs.mjs') != ''
+        run: |
+          mapfile -t changed < <(git diff --name-only "$BASE_SHA" HEAD -- \
+            'docs/decisions/*.md' '.notes/*.spec.md' 2>/dev/null || true)
+          if [ "${#changed[@]}" -eq 0 ]; then
+            node scripts/validate-adrs.mjs
+          else
+            node scripts/validate-adrs.mjs "${changed[@]}"
+          fi
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
 
       - uses: theholocron/.github/.github/actions/auto-commit@main
         name: Commit and push linting fixes
