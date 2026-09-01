@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.2](https://github.com/theholocron/.github/compare/v3.1.1...v3.1.2) (2026-09-01)
+
+
+### Bug Fixes
+
+* 🐛 accept FERN_TOKEN fallback in wiki.yml ([#183](https://github.com/theholocron/.github/issues/183)) ([1a97d20](https://github.com/theholocron/.github/commit/1a97d205e6f159361e25ecaa7da07fa02e5024e3))
+
 ## [3.1.1](https://github.com/theholocron/.github/compare/v3.1.0...v3.1.1) (2026-08-31)
 
 
