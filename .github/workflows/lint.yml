@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-08-31T17:35:56.015Z
+# Synced:  2026-09-01T01:21:21.620Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Lint
@@ -202,6 +202,16 @@ jobs:
           else
             node scripts/validate-adrs.mjs "${changed[@]}"
           fi
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+
+      - name: Validate registry consistency
+        if: hashFiles('scripts/validate-registry.mjs') != ''
+        run: node scripts/validate-registry.mjs
+
+      - name: Validate docs presence for new packages
+        if: hashFiles('scripts/validate-docs-presence.mjs') != ''
+        run: node scripts/validate-docs-presence.mjs
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
 
