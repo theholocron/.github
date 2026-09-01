@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/theholocron/.github/compare/v3.1.2...v3.2.0) (2026-09-01)
+
+
+### Features
+
+* ✨ add GitHub deployment widget for Fern preview URLs ([#185](https://github.com/theholocron/.github/issues/185)) ([d5bc0d1](https://github.com/theholocron/.github/commit/d5bc0d17e45db10ac9e2dde1e7b42df4b1fd697a))
+
 ## [3.1.2](https://github.com/theholocron/.github/compare/v3.1.1...v3.1.2) (2026-09-01)
 
 
