@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-09-01T05:46:02.257Z
+# Synced:  2026-09-01T18:55:50.562Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Release
@@ -15,6 +15,15 @@ name: Release
 on: # yamllint disable-line rule:truthy
   workflow_call:
     inputs:
+      dry-run:
+        description: >
+          When true, runs semantic-release --dry-run: analyzes commits and
+          previews the next release without git writes or publish. Only
+          meaningful for workflow_dispatch triggers; push-triggered runs
+          always run fully.
+        type: boolean
+        required: false
+        default: false
       run-build:
         description: Run `pnpm build` before releasing
         type: boolean
@@ -107,9 +116,15 @@ jobs:
         name: Build
         if: ${{ inputs.run-build == true }}
 
-      - run: npx semantic-release
-        name: Release
+      - name: Release
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            npx semantic-release --dry-run
+          else
+            npx semantic-release
+          fi
         env:
+          DRY_RUN: ${{ inputs.dry-run }}
           # Prefer HOLOCRON_RELEASE_TOKEN (fine-grained PAT, Contents+Issues+PRs write,
           # owned by an admin with ruleset bypass) so @semantic-release/git can
           # push the version-bump commit through branch protection. Falls back to
@@ -120,7 +135,7 @@ jobs:
 
       - name: Get release version
         id: release_version
-        if: ${{ inputs.sentry-project != '' }}
+        if: ${{ inputs.sentry-project != '' && inputs.dry-run != true }}
         env:
           SENTRY_PROJECT: ${{ inputs.sentry-project }}
         run: |
@@ -130,7 +145,7 @@ jobs:
           fi
 
       - name: Create Sentry release
-        if: ${{ inputs.sentry-project != '' && steps.release_version.outputs.release != '' }}
+        if: ${{ inputs.sentry-project != '' && steps.release_version.outputs.release != '' && inputs.dry-run != true }}
         uses: getsentry/action-release@ff07929a6537bac57790c3451cf4d364aca38528 # v3
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
