@@ -1,7 +1,7 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
-# Source:  theholocron/holocron · packages/cli/src/commands/setup-workflows.ts
+# Source:  theholocron/holocron · packages/cli/src/commands/sync-github.ts
 # Tool:    holocron sync-github
-# Changes: edit source in theholocron/holocron and push to alpha or main.
+# Changes: edit source in theholocron/holocron
 name: Test
 
 on: # yamllint disable-line rule:truthy

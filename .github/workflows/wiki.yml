@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-09-01T22:59:08.655Z
+# Synced:  2026-09-03T21:32:28.400Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Wiki
@@ -55,14 +55,14 @@ on: # yamllint disable-line rule:truthy
 
 jobs:
   publish:
-    name: ${{ inputs.preview && 'Preview' || 'Publish' }} to Fern
+    name: ${{ inputs.preview && 'Preview' || 'Publish' }} to Wiki
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
       contents: read
       deployments: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
 
       - name: Install Fern CLI
@@ -92,7 +92,7 @@ jobs:
           BASE_PATH: ${{ inputs.base-path }}
         run: |
           PREVIEW_URL="https://${FERN_ORG}-preview-${PREVIEW_ID}.docs.buildwithfern.com${BASE_PATH:+/${BASE_PATH}}"
-          PAYLOAD=$(printf '{"ref":"%s","environment":"fern (Preview)","description":"Fern Docs","production_environment":false,"auto_merge":false,"required_contexts":[]}' \
+          PAYLOAD=$(printf '{"ref":"%s","environment":"wiki (Preview)","description":"Wiki","production_environment":false,"auto_merge":false,"required_contexts":[]}' \
             "$GITHUB_HEAD_REF")
           DEPLOY_ID=$(echo "$PAYLOAD" | gh api "repos/${GITHUB_REPOSITORY}/deployments" \
             --method POST --input - | jq -r '.id')
