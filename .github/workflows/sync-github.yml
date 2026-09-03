@@ -1,9 +1,9 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-09-01T22:59:08.654Z
+# Synced:  2026-09-03T21:32:28.400Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
-name: Sync GitHub Templates
+name: Sync workflow templates
 
 # Builds the holocron CLI from source and pushes updated workflow templates
 # and composite actions to downstream .github repos. Runs whenever the
@@ -66,7 +66,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
 
       - uses: theholocron/.github/.github/actions/setup@main
@@ -77,7 +77,7 @@ jobs:
 
       - name: Cache actionlint
         id: cache-actionlint
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: /tmp/actionlint
           key: actionlint-v1.7.7-linux-amd64
