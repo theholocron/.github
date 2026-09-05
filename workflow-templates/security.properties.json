@@ -1,5 +1,5 @@
 {
-  "name": "CodeQL",
+  "name": "Security",
   "description": "Analyze code for security vulnerabilities using GitHub CodeQL.",
   "iconName": "octicon shield"
 }
