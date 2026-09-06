@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-09-06T20:24:49.658Z
+# Synced:  2026-09-06T22:05:36.509Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Lint
@@ -196,7 +196,8 @@ jobs:
         if: hashFiles('scripts/validate-adrs.mjs') != ''
         run: |
           mapfile -t changed < <(git diff --name-only "$BASE_SHA" HEAD -- \
-            'docs/decisions/*.md' '.notes/*.spec.md' 2>/dev/null || true)
+            'docs/decisions/*.md' '.notes/*.spec.md' \
+            'docs/wiki/specifications/*.spec.md' 2>/dev/null || true)
           if [ "${#changed[@]}" -eq 0 ]; then
             node scripts/validate-adrs.mjs
           else
@@ -231,7 +232,6 @@ jobs:
           commit-user-name: ${{ steps.app-bot.outputs.name }}
           commit-user-email: ${{ steps.app-bot.outputs.email }}
           commit-author: "${{ steps.app-bot.outputs.name }} <${{ steps.app-bot.outputs.email }}>"
-
 
   conclusion:
     name: Conclusion
