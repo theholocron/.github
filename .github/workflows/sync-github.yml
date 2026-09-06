@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-09-06T22:05:36.509Z
+# Synced:  2026-09-06T22:25:17.984Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Sync workflow templates
@@ -52,6 +52,11 @@ on: # yamllint disable-line rule:truthy
           Generic GitHub token fallback for `gh` CLI calls. Used when neither
           HOLOCRON_READ_TOKEN nor HOLOCRON_SYNC_TOKEN is set.
         required: false
+      HOLOCRON_AXIOM_TOKEN:
+        description: >
+          Axiom API token. When set alongside the HOLOCRON_AXIOM_DATASET
+          repo/org variable, the CLI ships this run's structured logs to Axiom.
+        required: false
       TURBO_TOKEN:
         required: false
 
@@ -65,6 +70,8 @@ jobs:
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+      HOLOCRON_AXIOM_TOKEN: ${{ secrets.HOLOCRON_AXIOM_TOKEN }}
+      HOLOCRON_AXIOM_DATASET: ${{ vars.HOLOCRON_AXIOM_DATASET }}
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
