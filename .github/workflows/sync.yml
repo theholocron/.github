@@ -1,6 +1,6 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
 # Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-09-07T00:29:01.187Z
+# Synced:  2026-09-07T05:41:23.514Z
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron and push to alpha or main.
 name: Sync
@@ -83,6 +83,7 @@ jobs:
           HOLOCRON_ADMIN_TOKEN: ${{ secrets.HOLOCRON_ADMIN_TOKEN }}
           HOLOCRON_AXIOM_TOKEN: ${{ secrets.HOLOCRON_AXIOM_TOKEN || secrets.AXIOM_TOKEN }}
           HOLOCRON_AXIOM_DATASET: ${{ vars.HOLOCRON_AXIOM_DATASET || vars.AXIOM_DATASET }}
+          POSTHOG_PROJECT_TOKEN: ${{ vars.POSTHOG_PROJECT_TOKEN }}
           HOLOCRON_DEPLOY_TOKEN: ${{ secrets.HOLOCRON_DEPLOY_TOKEN }}
           HOLOCRON_ISSUES_TOKEN: ${{ secrets.HOLOCRON_ISSUES_TOKEN }}
           HOLOCRON_ORG_TOKEN: ${{ secrets.HOLOCRON_ORG_TOKEN }}
