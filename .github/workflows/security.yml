@@ -1,8 +1,7 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
-# Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-09-09T03:40:19.570Z
+# Source:  theholocron/holocron · packages/astromech/src/reusable.ts
 # Tool:    holocron sync-github
-# Changes: edit source in theholocron/holocron and push to alpha or main.
+# Changes: edit source in theholocron/holocron
 name: Security
 
 on: # yamllint disable-line rule:truthy
@@ -25,18 +24,18 @@ jobs:
     timeout-minutes: 45
     # Do not cancel in-progress security scans.
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
 
-      - uses: github/codeql-action/init@cdf488f595d80d6e07e03d4674febd5ab45fa938 # v4.37.9
+      - uses: github/codeql-action/init@99df26d4f13ea111d4ec1a7dddef6063f76b97e9 # v4.37.0
         name: Initialize CodeQL
         with:
           languages: ${{ inputs.language }}
 
-      - uses: github/codeql-action/autobuild@cdf488f595d80d6e07e03d4674febd5ab45fa938 # v4.37.9
+      - uses: github/codeql-action/autobuild@99df26d4f13ea111d4ec1a7dddef6063f76b97e9 # v4.37.0
         name: Autobuild
 
-      - uses: github/codeql-action/analyze@cdf488f595d80d6e07e03d4674febd5ab45fa938 # v4.37.9
+      - uses: github/codeql-action/analyze@99df26d4f13ea111d4ec1a7dddef6063f76b97e9 # v4.37.0
         name: Analyze
         with:
           category: /language:${{ inputs.language }}
