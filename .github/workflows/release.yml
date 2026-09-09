@@ -1,8 +1,7 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
-# Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-09-09T03:40:19.570Z
+# Source:  theholocron/holocron · packages/astromech/src/reusable.ts
 # Tool:    holocron sync-github
-# Changes: edit source in theholocron/holocron and push to alpha or main.
+# Changes: edit source in theholocron/holocron
 name: Release
 
 # Semantic-release with OIDC Trusted Publishing.
@@ -91,7 +90,7 @@ jobs:
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     # Do not cancel in-progress releases — a partial release is worse than a slow one.
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
         with:
           fetch-depth: 0

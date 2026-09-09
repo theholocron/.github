@@ -1,5 +1,5 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
-# Source:  theholocron/holocron · packages/cli/src/commands/sync-github.ts
+# Source:  theholocron/holocron · packages/astromech/src/reusable.ts
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron
 name: Security

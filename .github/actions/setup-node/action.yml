@@ -1,8 +1,7 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
-# Source:  theholocron/holocron · packages/cli/src/templates/index.ts
-# Synced:  2026-09-09T03:40:19.570Z
+# Source:  theholocron/holocron · packages/astromech/src/reusable.ts
 # Tool:    holocron sync-github
-# Changes: edit source in theholocron/holocron and push to alpha or main.
+# Changes: edit source in theholocron/holocron
 name: Setup Node
 description: Install pnpm and Node.js with pnpm dependency caching.
 
