@@ -21,10 +21,10 @@ overwritten on the next sync.
 
 | Path | Owned here? | Source |
 |---|---|---|
-| `.github/workflows/*.yml` | **No — generated** | `holocron/packages/cli/src/templates/index.ts` (`REUSABLE_WORKFLOWS`) |
-| `.github/actions/*/action.yml` | **No — generated** | `holocron/packages/cli/src/templates/index.ts` (`ACTIONS`) |
-| `workflow-templates/*.yml` | **No — generated** | `holocron/packages/cli/src/templates/` |
-| `workflow-templates/*.properties.json` | **No — generated** | `holocron/packages/cli/src/templates/` |
+| `.github/workflows/*.yml` | **No — generated** | `holocron/packages/astromech/src/reusable.ts` (`REUSABLE_WORKFLOWS`; `.yml` in `src/templates/reusable/`) |
+| `.github/actions/*/action.yml` | **No — generated** | `holocron/packages/astromech/src/reusable.ts` (`REUSABLE_ACTIONS`; `.yml` in `src/templates/reusable/actions/`) |
+| `workflow-templates/*.yml` | **No — generated** | `holocron/packages/astromech/src/reusable.ts` (`reusableTemplates()`) |
+| `workflow-templates/*.properties.json` | **No — generated** | `holocron/packages/astromech/src/reusable.ts` (`WORKFLOW_TEMPLATE_PROPERTIES`) |
 | `.github/ISSUE_TEMPLATE/` | Yes | Hand-maintained here |
 | `.github/pull_request_template.md` | Yes | Hand-maintained here |
 | `.github/CODEOWNERS` | Yes | Hand-maintained here |
@@ -53,18 +53,18 @@ Every generated file begins with:
 
 ```yaml
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
-# Source:  theholocron/holocron · packages/cli/src/templates/index.ts
+# Source:  theholocron/holocron · packages/astromech/src/reusable.ts
 # Synced:  <timestamp>
 # Tool:    holocron sync-github
-# Changes: edit source in theholocron/holocron and push to main.
+# Changes: edit source in theholocron/holocron
 ```
 
 ## How to update a generated workflow or action
 
 1. Open `theholocron/holocron` (local path: `~/Code/theholocron/holocron/`)
-2. Edit `packages/cli/src/templates/index.ts` — workflows are in the `REUSABLE_WORKFLOWS`
-   export, actions are in the `ACTIONS` export (the `workflows/` and `actions/` YAML files
-   were removed; `index.ts` is the single source of truth)
+2. Edit the `.yml` in `packages/astromech/src/templates/reusable/` (workflows) or
+   `packages/astromech/src/templates/reusable/actions/` (actions); `reusable.ts`
+   maps them into `REUSABLE_WORKFLOWS` / `REUSABLE_ACTIONS`
 3. Push to `main`
 4. The `sync-github.yml` CI workflow in `holocron` runs `holocron sync-github`,
    opens a PR here on branch `chore/sync-templates`
