@@ -4,6 +4,14 @@
 Org-level community health files, reusable CI workflows, and workflow templates.
 <!-- /holocron:description -->
 
+> **This repo is a pure sync target.** `.github/workflows/*`, `.github/actions/*`
+> and `workflow-templates/*` are **generated** from
+> `packages/astromech/src/templates/` in
+> [`theholocron/holocron`](https://github.com/theholocron/holocron) and pushed
+> here by `holocron sync-github` — every file carries an "AUTO-GENERATED — do not
+> edit" header. Change a reusable workflow by editing the source there; the sync
+> opens a PR against this repo.
+
 ## Using reusable workflows
 
 Any public repo can call these workflows directly. A full CI setup is a handful
@@ -41,7 +49,7 @@ which writes and maintains these files automatically from `holocron.config.json`
 | `stale.yml` | daily schedule | marks stale issues/PRs |
 | `post-release.yml` | `workflow_call` | dispatches `sync-broadcast.yml` with `steps=readme`; opt-in for repos that release packages other repos depend on via registry-doc |
 | `sync-broadcast.yml` | `workflow_dispatch` | discovers all repos with `sync.yml` via GitHub API and fans out a dispatch |
-| `sync-github.yml` | push to main/alpha in `holocron` | re-generates and PRs these files |
+| `sync-github.yml` | push to main in `holocron` | regenerates these files from `@theholocron/astromech` and opens a PR |
 | `sync.yml` | `workflow_call` | runs `holocron sync` with optional `--steps`, auto-commits, opens PR |
 | `test.yml` | push + PR | vitest + Codecov; optional Storybook, Chromatic, Cypress, Playwright jobs |
 | `typecheck.yml` | push + PR | `pnpm typecheck` (`tsc --noEmit`) |
@@ -144,8 +152,8 @@ The workflow and action files in this repo are **generated** from
 [theholocron/holocron](https://github.com/theholocron/holocron) — do not edit them
 directly here. To update a workflow:
 
-1. Edit `packages/cli/src/templates/workflows/<name>.yml` in `holocron`
-2. Push to `alpha` — the `sync-github` CI workflow opens a PR here automatically
+1. Edit the `.yml` in `packages/astromech/src/templates/reusable/` in `holocron`
+2. Push to `main` — the `sync-github` CI workflow opens a PR here automatically
 
 Community health files (`CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, issue templates,
 `CODEOWNERS`, `labeler.yml`, etc.) are hand-maintained in this repo directly.
