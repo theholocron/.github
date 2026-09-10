@@ -27,10 +27,8 @@ jobs:
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
 
-      - uses: theholocron/.github/.github/actions/holocron@main
+      - run: pnpm typecheck
         name: Type check
-        with:
-          task: typecheck
 
 
   conclusion:

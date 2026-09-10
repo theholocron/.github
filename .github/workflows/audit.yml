@@ -7,6 +7,11 @@ name: Audit
 on: # yamllint disable-line rule:truthy
   workflow_call:
     inputs:
+      build-script:
+        description: Script to build and upload bundle stats to Codecov
+        type: string
+        required: false
+        default: pnpm build
       run-knip:
         description: Run Knip to detect unused files, exports, and dependencies
         type: boolean
@@ -19,12 +24,16 @@ on: # yamllint disable-line rule:truthy
         default: false
       lighthouse-config:
         description: >
-          Path to the Lighthouse CI config file, forwarded to `holocron run
-          audit performance -- --config`. Defaults to lighthouse.config.cjs
-          (the org standard).
+          Path to the Lighthouse CI config file passed as --config to lhci autorun.
+          Defaults to lighthouse.config.cjs (the org standard).
         type: string
         required: false
         default: lighthouse.config.cjs
+      knip-script:
+        description: Script that invokes Knip (must exit non-zero on findings)
+        type: string
+        required: false
+        default: pnpm run audit
     secrets:
       CODECOV_TOKEN:
         required: false
@@ -43,8 +52,6 @@ jobs:
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-      # Read by the bundle-stats uploader inside `holocron run build`.
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
@@ -52,10 +59,11 @@ jobs:
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
 
-      - uses: theholocron/.github/.github/actions/holocron@main
+      - run: eval "$BUILD_SCRIPT"
         name: Build and upload bundle stats
-        with:
-          task: build
+        env:
+          BUILD_SCRIPT: ${{ inputs.build-script }}
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   knip:
     name: Knip
@@ -76,11 +84,10 @@ jobs:
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
 
-      - uses: theholocron/.github/.github/actions/holocron@main
+      - run: eval "$KNIP_SCRIPT"
         name: Run Knip
-        with:
-          task: audit
-          job: knip
+        env:
+          KNIP_SCRIPT: ${{ inputs.knip-script }}
 
   performance:
     name: Audit the performance
@@ -92,8 +99,6 @@ jobs:
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-      # Read by `lhci autorun` inside `holocron run audit performance`.
-      LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
@@ -104,12 +109,11 @@ jobs:
       - run: npm install -g @lhci/cli@0.14.x
         name: Install Lighthouse CLI
 
-      - uses: theholocron/.github/.github/actions/holocron@main
+      - run: lhci autorun --config="$LIGHTHOUSE_CONFIG"
         name: Run Lighthouse CI
-        with:
-          task: audit
-          job: performance
-          args: --config=${{ inputs.lighthouse-config }}
+        env:
+          LIGHTHOUSE_CONFIG: ${{ inputs.lighthouse-config }}
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
 
   conclusion:
