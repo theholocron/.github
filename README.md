@@ -68,6 +68,7 @@ Reusable action steps callable from any workflow:
 | Action | Purpose |
 |---|---|
 | `auto-commit` | Commit + push file changes to a branch; outputs `changes-detected` |
+| `holocron` | Run a Holocron CLI task (`holocron run <task> [job]`) — the `typecheck` / `test` / `audit` workflows use it so CI runs the same command as `holocron ci` locally |
 | `install` | `pnpm install --frozen-lockfile` |
 | `setup` | Orchestrates `setup-node` + `install` in one step |
 | `setup-node` | pnpm + Node 22 with pnpm dependency caching |

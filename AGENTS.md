@@ -102,11 +102,12 @@ When adding a new third-party action:
 
 ## Composite actions (`.github/actions/`)
 
-Four actions exist. All are generated; edit the templates in `holocron` to change them.
+Five actions exist. All are generated; edit the templates in `holocron` to change them.
 
 | Action | Purpose | Call |
 |---|---|---|
 | `auto-commit` | Commit + push file changes to a branch; outputs `changes-detected` | `theholocron/.github/.github/actions/auto-commit@main` |
+| `holocron` | Run a Holocron CLI task (`holocron run <task> [job]`); builds the CLI from source first when it resolves to an unbuilt workspace checkout | `theholocron/.github/.github/actions/holocron@main` |
 | `install` | `pnpm install --frozen-lockfile` | `theholocron/.github/.github/actions/install@main` |
 | `setup` | Runs `setup-node` + `install` | `theholocron/.github/.github/actions/setup@main` |
 | `setup-node` | pnpm + Node 22 + pnpm cache | `theholocron/.github/.github/actions/setup-node@main` |
