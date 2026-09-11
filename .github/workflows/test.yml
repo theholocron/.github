@@ -91,7 +91,7 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           use_oidc: true
-          files: '**/test-report.junit.xml'
+          files: "**/test-report.junit.xml"
 
   storybook:
     name: Run Storybook interaction tests
@@ -127,7 +127,7 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           use_oidc: true
-          files: '**/test-report.junit.xml'
+          files: "**/test-report.junit.xml"
 
   visual-and-composition:
     name: Test Visual and Composition (${{ matrix.project.tokenName }})
@@ -218,7 +218,6 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 
   conclusion:
     name: Conclusion
