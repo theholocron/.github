@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.1](https://github.com/theholocron/.github/compare/v3.2.0...v3.2.1) (2026-09-11)
+
+
+### Bug Fixes
+
+* 🐛 rename yamllint.config.yml to .yamllint.yml in lint and review workflows ([#220](https://github.com/theholocron/.github/issues/220)) ([78f67e9](https://github.com/theholocron/.github/commit/78f67e9faec69c96a5f324103e7846d9ef34841a))
+
 ## [3.2.0](https://github.com/theholocron/.github/compare/v3.1.2...v3.2.0) (2026-09-01)
 
 
