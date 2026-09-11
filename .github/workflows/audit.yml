@@ -111,7 +111,6 @@ jobs:
           job: performance
           args: --config=${{ inputs.lighthouse-config }}
 
-
   conclusion:
     name: Conclusion
     runs-on: ubuntu-latest
