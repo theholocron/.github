@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.2](https://github.com/theholocron/.github/compare/v3.2.1...v3.2.2) (2026-09-11)
+
+
+### Bug Fixes
+
+* 🐛 rename yamllint.config.yml to .yamllint.yml for auto-detection ([#223](https://github.com/theholocron/.github/issues/223)) ([c6a8bd5](https://github.com/theholocron/.github/commit/c6a8bd58f67d0996f03f2c186f6590de82659c0b))
+
 ## [3.2.1](https://github.com/theholocron/.github/compare/v3.2.0...v3.2.1) (2026-09-11)
 
 
