@@ -2,7 +2,7 @@
 # Source:  theholocron/holocron · packages/astromech/src/reusable.ts
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron
-name: Audit the Performance
+name: Verification
 
 on: # yamllint disable-line rule:truthy
   push:
@@ -14,5 +14,6 @@ permissions:
 
 jobs:
   performance:
+    name: Audit the Performance
     uses: theholocron/.github/.github/workflows/verification.performance.yml@main
     secrets: inherit
