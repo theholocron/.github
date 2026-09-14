@@ -12,7 +12,7 @@ on: # yamllint disable-line rule:truthy
 
 jobs:
   adrs:
-    name: ADRs and specs
+    name: Validate ADRs and specs
     permissions:
       contents: read
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
           job: adrs
 
   registry:
-    name: Registry
+    name: Validate registry consistency
     permissions:
       contents: read
     runs-on: ubuntu-latest
@@ -52,7 +52,7 @@ jobs:
           job: registry
 
   docs-presence:
-    name: Docs presence
+    name: Validate docs presence
     permissions:
       contents: read
     runs-on: ubuntu-latest

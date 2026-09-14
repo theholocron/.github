@@ -12,7 +12,7 @@ on: # yamllint disable-line rule:truthy
 
 jobs:
   typecheck:
-    name: tsc --noEmit
+    name: Run tsc --noEmit
     permissions:
       contents: read
     runs-on: ubuntu-latest
