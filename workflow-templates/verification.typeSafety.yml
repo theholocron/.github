@@ -1,0 +1,23 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/astromech/src/reusable.ts
+# Tool:    holocron sync-github
+# Changes: edit source in theholocron/holocron
+name: Typecheck
+
+on: # yamllint disable-line rule:truthy
+  push:
+    branches: [main, alpha]
+  pull_request:
+
+concurrency:
+  group: typecheck-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  typecheck:
+    name: Typecheck
+    uses: theholocron/.github/.github/workflows/verification.typeSafety.yml@main
+    secrets: inherit

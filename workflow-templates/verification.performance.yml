@@ -1,0 +1,18 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/astromech/src/reusable.ts
+# Tool:    holocron sync-github
+# Changes: edit source in theholocron/holocron
+name: Audit the Performance
+
+on: # yamllint disable-line rule:truthy
+  push:
+    branches: [main, alpha]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  performance:
+    uses: theholocron/.github/.github/workflows/verification.performance.yml@main
+    secrets: inherit

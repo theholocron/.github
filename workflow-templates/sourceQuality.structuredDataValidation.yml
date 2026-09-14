@@ -1,0 +1,23 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/astromech/src/reusable.ts
+# Tool:    holocron sync-github
+# Changes: edit source in theholocron/holocron
+name: Structured Data Validation
+
+on: # yamllint disable-line rule:truthy
+  push:
+    branches: [main, alpha]
+  pull_request:
+
+concurrency:
+  group: source-quality-structured-data-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  structured-data-validation:
+    name: Structured Data Validation
+    uses: theholocron/.github/.github/workflows/sourceQuality.structuredDataValidation.yml@main
+    secrets: inherit

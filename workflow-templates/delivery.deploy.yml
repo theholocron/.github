@@ -1,0 +1,25 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · packages/astromech/src/reusable.ts
+# Tool:    holocron sync-github
+# Changes: edit source in theholocron/holocron
+name: Deploy
+
+on: # yamllint disable-line rule:truthy
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    name: Deploy
+    uses: theholocron/.github/.github/workflows/delivery.deploy.yml@main
+    secrets: inherit
