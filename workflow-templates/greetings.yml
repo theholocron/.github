@@ -2,7 +2,7 @@
 # Source:  theholocron/holocron · packages/astromech/src/reusable.ts
 # Tool:    holocron sync-github
 # Changes: edit source in theholocron/holocron
-name: Platform
+name: Greetings
 
 on: # yamllint disable-line rule:truthy
   pull_request:
@@ -14,6 +14,5 @@ permissions:
 
 jobs:
   greetings:
-    name: Greetings
     uses: theholocron/.github/.github/workflows/greetings.yml@main
     secrets: inherit
