@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.3.0](https://github.com/theholocron/.github/compare/v3.2.2...v3.3.0) (2026-09-16)
+
+
+### Features
+
+* **ci:** add delivery.build reusable workflow ([#231](https://github.com/theholocron/.github/issues/231)) ([da06146](https://github.com/theholocron/.github/commit/da061467d8b93adce671d56a67411b517d0c5727))
+
+
+### Bug Fixes
+
+* 🐛 dead editorconfig-checker release URL/layout ([#225](https://github.com/theholocron/.github/issues/225)) ([31c1ee2](https://github.com/theholocron/.github/commit/31c1ee2fc57d61418796639f51839d4eb2ebe342))
+* 🐛 re-link node_modules/.bin after the composite action's self-heal build ([#227](https://github.com/theholocron/.github/issues/227)) ([72d3366](https://github.com/theholocron/.github/commit/72d336614e6cffaf28154f4f7bc533798392c8ed))
+* **ci:** emergency bootstrap patch — build full workspace, not a scoped filter ([d1cb7c7](https://github.com/theholocron/.github/commit/d1cb7c7d363ca13267f383597ff8920c73a8d1d4))
+* **ci:** emergency bootstrap patch — correct build script name ([e69bcb2](https://github.com/theholocron/.github/commit/e69bcb2a3644909ae3702dcdbf63490de976331d))
+
 ## [3.2.2](https://github.com/theholocron/.github/compare/v3.2.1...v3.2.2) (2026-09-11)
 
 
