@@ -1,5 +1,25 @@
 # Changelog
 
+## [3.3.0](https://github.com/theholocron/.github/compare/v3.2.2...v3.3.0) (2026-09-25)
+
+
+### Features
+
+* **ci:** add delivery.build reusable workflow ([#231](https://github.com/theholocron/.github/issues/231)) ([da06146](https://github.com/theholocron/.github/commit/da061467d8b93adce671d56a67411b517d0c5727))
+* ship dispatched-check output to Axiom, inline it on the check ([#246](https://github.com/theholocron/.github/issues/246)) ([8f1c024](https://github.com/theholocron/.github/commit/8f1c024d7f44243f97d7ffdc6762bf339b2287a0))
+
+
+### Bug Fixes
+
+* 🐛 dead editorconfig-checker release URL/layout ([#225](https://github.com/theholocron/.github/issues/225)) ([31c1ee2](https://github.com/theholocron/.github/commit/31c1ee2fc57d61418796639f51839d4eb2ebe342))
+* 🐛 re-link node_modules/.bin after the composite action's self-heal build ([#227](https://github.com/theholocron/.github/issues/227)) ([72d3366](https://github.com/theholocron/.github/commit/72d336614e6cffaf28154f4f7bc533798392c8ed))
+* **ci:** emergency bootstrap patch — build full workspace, not a scoped filter ([d1cb7c7](https://github.com/theholocron/.github/commit/d1cb7c7d363ca13267f383597ff8920c73a8d1d4))
+* **ci:** emergency bootstrap patch — correct build script name ([e69bcb2](https://github.com/theholocron/.github/commit/e69bcb2a3644909ae3702dcdbf63490de976331d))
+* drop redundant Sentinel/ check-name prefix, add Axiom severity level ([#247](https://github.com/theholocron/.github/issues/247)) ([3320d0c](https://github.com/theholocron/.github/commit/3320d0cbd96c25380e2a970e8a737a4e51f1e4a8))
+* link dispatched checks to the job's log view, not the run summary ([#240](https://github.com/theholocron/.github/issues/240)) ([bb3e57f](https://github.com/theholocron/.github/commit/bb3e57f22eb905321e7d35d6741a1179db214b1e))
+* reapply dispatched-check token-scope fix lost in an earlier squash-merge ([#242](https://github.com/theholocron/.github/issues/242)) ([0ee3579](https://github.com/theholocron/.github/commit/0ee35798f1ac99fa2c0eb935d505911d678121d5))
+* scope the dispatched-check workflow's minted token to the target repo ([#239](https://github.com/theholocron/.github/issues/239)) ([540fd31](https://github.com/theholocron/.github/commit/540fd31579eba37e12fd066cf4b65a480c36cf85))
+
 ## [3.2.2](https://github.com/theholocron/.github/compare/v3.2.1...v3.2.2) (2026-09-11)
 
 
