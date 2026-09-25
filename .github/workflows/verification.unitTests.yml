@@ -70,7 +70,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         name: Checkout repository
 
       - uses: theholocron/.github/.github/actions/setup@main
@@ -81,7 +81,7 @@ jobs:
         with:
           task: verification.unitTests
 
-      - uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+      - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         name: Upload coverage to Codecov
         with:
           use_oidc: true
@@ -105,7 +105,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         name: Checkout repository
 
       - uses: theholocron/.github/.github/actions/setup@main
@@ -117,7 +117,7 @@ jobs:
       - run: pnpm test:storybook
         name: Run Storybook tests
 
-      - uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+      - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         name: Upload coverage to Codecov
         with:
           use_oidc: true
@@ -147,7 +147,7 @@ jobs:
       statuses: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         name: Checkout repository
         with:
           fetch-depth: 0
@@ -155,7 +155,7 @@ jobs:
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
 
-      - uses: chromaui/action@14cfaef73576e69f95f47f60058063f46ca38719 # v18
+      - uses: chromaui/action@bb3b582719a93c1828c5e520e62992b2937d7889 # v18
         name: Publish to Chromatic
         with:
           projectToken: ${{ (matrix.project.tokenName == 'default' || matrix.project.tokenName == '') && secrets.CHROMATIC_PROJECT_TOKEN || secrets[format('CHROMATIC_PROJECT_TOKEN_{0}', matrix.project.tokenName)] }}
@@ -178,7 +178,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         name: Checkout repository
 
       - uses: theholocron/.github/.github/actions/setup@main
@@ -205,7 +205,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         name: Checkout repository
 
       - uses: theholocron/.github/.github/actions/setup@main
@@ -214,7 +214,7 @@ jobs:
       - run: pnpm exec cypress install
         name: Install Cypress binary
 
-      - uses: cypress-io/github-action@1052aa98bbbe4f55210f844878213c07d9c8c399 # v6.7.13
+      - uses: cypress-io/github-action@01e3b659a495b41649cdd0aa82e1d1624e26520b # v7.4.4
         name: Cypress run
         with:
           start: pnpm dev
