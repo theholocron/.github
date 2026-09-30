@@ -90,7 +90,7 @@ jobs:
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     # Do not cancel in-progress releases — a partial release is worse than a slow one.
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         name: Checkout repository
         with:
           fetch-depth: 0
@@ -156,7 +156,7 @@ jobs:
         with:
           task: verification.unitTests
 
-      - uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+      - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         name: Upload release-commit coverage to Codecov
         if: ${{ steps.release.outputs.commit != '' }}
         with:
