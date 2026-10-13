@@ -260,7 +260,7 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
-          command: deploy-on-release
+          command: deploy on-release
           args: >-
             --channel=${{ needs.release.outputs.channel }}
             --from=${{ needs.release.outputs.previous }}
