@@ -107,7 +107,7 @@ jobs:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
           APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
 
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         name: Checkout repository
         with:
           fetch-depth: 0
@@ -148,7 +148,7 @@ jobs:
           fi
           echo "eslint=$eslint" >> "$GITHUB_OUTPUT"
 
-      - uses: super-linter/super-linter/slim@4ce20838b8ab83717e78138c5b3a1407148e0918 # v8.7.0
+      - uses: super-linter/super-linter/slim@2da136927bd4a73596db63044b504547c62cb854 # v9.0.0
         name: Run Super Linter
         env:
           GITHUB_TOKEN: ${{ github.token }}
