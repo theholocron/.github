@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.3.1](https://github.com/theholocron/.github/compare/v3.3.0...v3.3.1) (2026-10-20)
+
+
+### Bug Fixes
+
+* nest command invocations under their new groups (deploy on-release, sync github) ([#255](https://github.com/theholocron/.github/issues/255)) ([506fc1e](https://github.com/theholocron/.github/commit/506fc1e74b7236ce40a42e414055b76c322cbc4b))
+* word-split multi-word holocron commands in the composite action ([#257](https://github.com/theholocron/.github/issues/257)) ([ab3e3f3](https://github.com/theholocron/.github/commit/ab3e3f32f93e70f6787602928ed154924f33191c)), closes [#255](https://github.com/theholocron/.github/issues/255)
+
 ## [3.3.0](https://github.com/theholocron/.github/compare/v3.2.2...v3.3.0) (2026-10-05)
 
 
