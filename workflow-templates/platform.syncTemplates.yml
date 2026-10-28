@@ -1,5 +1,5 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
-# Source:  theholocron/holocron · packages/astromech/src/generators/github-action-reusable-workflows/github-action-reusable-workflows.ts
+# Source:  theholocron/holocron · cli/astromech/src/generators/github-action-reusable-workflows/github-action-reusable-workflows.ts
 # Tool:    holocron sync github
 # Changes: edit source in theholocron/holocron
 name: Platform
@@ -20,10 +20,10 @@ on: # yamllint disable-line rule:truthy
     # enforces for npm's dist-tags and Sentinel's own deploy trigger.
     branches: [main]
     paths:
-      - packages/astromech/src/templates/**
-      - packages/astromech/src/generators/**
-      - packages/astromech/src/registry/**
-      - packages/cli/src/templates/**
+      - cli/astromech/src/templates/**
+      - cli/astromech/src/generators/**
+      - cli/astromech/src/registry/**
+      - cli/cli/src/templates/**
   workflow_dispatch: {}
 
 concurrency:

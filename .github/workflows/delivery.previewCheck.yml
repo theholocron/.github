@@ -1,5 +1,5 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
-# Source:  theholocron/holocron · packages/astromech/src/generators/github-action-reusable-workflows/github-action-reusable-workflows.ts
+# Source:  theholocron/holocron · cli/astromech/src/generators/github-action-reusable-workflows/github-action-reusable-workflows.ts
 # Tool:    holocron sync github
 # Changes: edit source in theholocron/holocron
 name: Preview Check
@@ -94,7 +94,7 @@ jobs:
           }
           echo "url=$url" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         name: Checkout repository
         with:
           ref: ${{ inputs.sha }}
@@ -176,7 +176,7 @@ jobs:
       - name: Verify project and run monitoring checks
         env:
           # Read directly by `monitoring run-resolved`
-          # (packages/cli/src/cli.ts) -- not part of the CLI's own
+          # (cli/cli/src/cli.ts) -- not part of the CLI's own
           # `--token`-resolution chain, since neither is a vendor API
           # credential this command calls anything with: VERCEL_TOKEN
           # only verifies, read-only, that the preview URL resolves to

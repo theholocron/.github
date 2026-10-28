@@ -1,5 +1,5 @@
 # AUTO-GENERATED — do not edit in theholocron/.github directly.
-# Source:  theholocron/holocron · packages/astromech/src/generators/github-action-reusable-workflows/github-action-reusable-workflows.ts
+# Source:  theholocron/holocron · cli/astromech/src/generators/github-action-reusable-workflows/github-action-reusable-workflows.ts
 # Tool:    holocron sync github
 # Changes: edit source in theholocron/holocron
 name: Holocron
@@ -98,7 +98,7 @@ runs:
         # repo itself). Resolving the package's main export gives dist/index.mjs;
         # the bin sits next to it as dist/cli.mjs. This is `require.resolve` from
         # node_modules — it works in the holocron monorepo AND in every consumer
-        # repo (theholocron/holocron#655), unlike a hard-coded `packages/cli/…`.
+        # repo (theholocron/holocron#655), unlike a hard-coded `cli/cli/…`.
         cli="$(dirname "$(node -e 'process.stdout.write(require.resolve("@theholocron/cli"))')")/cli.mjs"
         if [ ! -f "$cli" ]; then
           echo "::error::@theholocron/cli entry not found at $cli — is the workspace built?" >&2
