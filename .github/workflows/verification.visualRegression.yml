@@ -48,7 +48,7 @@ jobs:
       - uses: theholocron/.github/.github/actions/setup@main
         name: Setup
 
-      - uses: chromaui/action@e50abd573c8a789526f165fec06137a7c21d7299 # v18
+      - uses: chromaui/action@5bcadb5104b09e360e210c54f95a7437c2d82bab # v18
         name: Publish to Chromatic
         with:
           projectToken: ${{ (matrix.project.tokenName == 'default' || matrix.project.tokenName == '') && secrets.CHROMATIC_PROJECT_TOKEN || secrets[format('CHROMATIC_PROJECT_TOKEN_{0}', matrix.project.tokenName)] }}
