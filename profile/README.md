@@ -18,7 +18,7 @@ Find all our docs and guidelines in [The Holocron Archives](https://docs.theholo
 
 ## 🔧 Current Projects
 
-We’re working on a number of [open-source configurations](https://github.com/theholocron/configs), libraries, and tools designed to help developers streamline their workflow and maintain high-quality code.
+We’re working on a number of [open-source configurations](https://github.com/theholocron/holocron/tree/alpha/configs), libraries, and tools designed to help developers streamline their workflow and maintain high-quality code.
 
 <!-- @TODO: add in public OSS projects -->
 

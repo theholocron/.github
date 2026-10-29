@@ -153,8 +153,7 @@ Any `theholocron/*` repo with a `holocron.config.json` and a
 
 Key repos in the org:
 - `theholocron/holocron` — the CLI source; also the origin of all syncs
-- `theholocron/configs` — shared config packages (`@theholocron/*-config`)
-- `theholocron/clients` — HTTP clients and API wrappers
+- `theholocron/holocron` also holds the shared config packages (`@theholocron/*-config`, in `configs/`) and the HTTP clients and API wrappers (in `clients/`)
 - `theholocron/.github-private` — internal member documentation
 - `theholocron/.github` — this repo
 
