@@ -2,6 +2,12 @@
 # Source:  theholocron/holocron · cli/astromech/src/generators/github-action-reusable-workflows/github-action-reusable-workflows.ts
 # Tool:    holocron sync github
 # Changes: edit source in theholocron/holocron
+
+# DEPRECATED — frozen copy.
+# This file no longer changes. It moved to theholocron/holocron; use theholocron/holocron/.github/workflows/verification.typeSafety.yml@ci-v1.
+# It is kept until `holocron probe ci refs` finds no reference to it, then removed.
+# Tracking: https://github.com/theholocron/holocron/issues/1215
+
 name: Typecheck
 
 on: # yamllint disable-line rule:truthy
