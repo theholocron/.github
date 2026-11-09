@@ -1,0 +1,21 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · cli/astromech/src/generators/github-action-reusable-workflows/github-action-reusable-workflows.ts
+# Tool:    holocron sync github
+# Changes: edit source in theholocron/holocron
+name: Sentinel Deploy
+
+on: # yamllint disable-line rule:truthy
+  push:
+    branches: [main]
+    paths:
+      - "apps/sentinel/**"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy
+    uses: theholocron/.github/.github/workflows/deploy-sentinel.yml@main
+    secrets: inherit
