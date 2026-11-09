@@ -1,0 +1,18 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · cli/astromech/src/generators/github-action-reusable-workflows/github-action-reusable-workflows.ts
+# Tool:    holocron sync github
+# Changes: edit source in theholocron/holocron
+name: Platform
+
+on: # yamllint disable-line rule:truthy
+  schedule:
+    - cron: "0 14 * * 1"
+  workflow_dispatch: {}
+
+permissions: {}
+
+jobs:
+  doctor-reminder:
+    name: Doctor reminder
+    uses: theholocron/.github/.github/workflows/remind-doctor.yml@main
+    secrets: inherit
