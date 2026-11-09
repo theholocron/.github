@@ -1,0 +1,17 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · cli/astromech/src/generators/github-action-reusable-workflows/github-action-reusable-workflows.ts
+# Tool:    holocron sync github
+# Changes: edit source in theholocron/holocron
+name: Source Quality
+
+on: # yamllint disable-line rule:truthy
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-catalogs:
+    name: Dependency catalogs
+    uses: theholocron/.github/.github/workflows/validate-deps.yml@main
+    secrets: inherit
