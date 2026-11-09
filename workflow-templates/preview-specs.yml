@@ -1,0 +1,23 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · cli/astromech/src/generators/github-action-reusable-workflows/github-action-reusable-workflows.ts
+# Tool:    holocron sync github
+# Changes: edit source in theholocron/holocron
+name: Spec discussions (pull request)
+
+on: # yamllint disable-line rule:truthy
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    paths:
+      - ".notes/*.spec.md"
+      - "docs/wiki/specifications/*.spec.md"
+      - "docs/wiki/decisions/*.md"
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  sync:
+    name: Sync
+    uses: theholocron/.github/.github/workflows/preview-specs.yml@main
+    secrets: inherit
