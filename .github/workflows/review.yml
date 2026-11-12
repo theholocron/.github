@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
@@ -82,7 +82,7 @@ jobs:
 
       - name: YamlLint
         if: ${{ hashFiles('.yamllint.yml') != '' }}
-        uses: reviewdog/action-yamllint@b5f7217d8c815ae374d1d55840d5e569d82f01f0 # v1
+        uses: reviewdog/action-yamllint@020fba38ce9fed550c704d933aeeb7d6360f7d47 # v1
         with:
           reporter: github-pr-annotations
           tool_name: "Review / yamllint"
@@ -91,7 +91,7 @@ jobs:
 
       - name: ActionLint (GitHub Actions)
         if: ${{ hashFiles('.github/workflows/*.yml', '.github/workflows/*.yaml') != '' }}
-        uses: reviewdog/action-actionlint@6fb7acc99f4a1008869fa8a0f09cfca740837d9d # v1
+        uses: reviewdog/action-actionlint@a7d35aaf8c309203a4ae861d32b7bd490baa7bf3 # v1
         with:
           reporter: github-pr-annotations
           tool_name: "Review / actionlint"
@@ -103,7 +103,7 @@ jobs:
 
       - name: ESLint
         if: steps.detect.outputs.eslint == 'true'
-        uses: reviewdog/action-eslint@556a3fdaf8b4201d4d74d406013386aa4f7dab96 # v1.34.0
+        uses: reviewdog/action-eslint@6dad10dc50476699ad1ddbbb19bf55d36f311a39 # v1.37.0
         with:
           reporter: github-pr-annotations
           tool_name: "Review / eslint"
@@ -124,7 +124,7 @@ jobs:
 
       - name: ShellCheck
         if: steps.detect.outputs.shell == 'true'
-        uses: reviewdog/action-shellcheck@4c07458293ac342d477251099501a718ae5ef86e # v1
+        uses: reviewdog/action-shellcheck@b4ffc0b2a69f857f82b74d1310cd3e62e932f9f7 # v1
         with:
           reporter: github-pr-annotations
           tool_name: "Review / shellcheck"
@@ -136,7 +136,7 @@ jobs:
 
       - name: Hadolint
         if: steps.detect.outputs.docker == 'true'
-        uses: reviewdog/action-hadolint@1b2cfa6ba72072ad35158d7ff3aa49bbdc03506d # v1
+        uses: reviewdog/action-hadolint@a3bc84c51f4ddbcbc5b91d950d0b66c15c88b113 # v1
         with:
           reporter: github-pr-annotations
           tool_name: "Review / hadolint"
@@ -158,7 +158,7 @@ jobs:
 
       - name: Alex (inclusive language)
         if: steps.detect.outputs.markdown == 'true'
-        uses: reviewdog/action-alex@347481655add010a2ae302df34b57c9bcfa0d6e4 # v1
+        uses: reviewdog/action-alex@f39fd335ddb3b76d5595d5c452078903cf872e96 # v1
         with:
           reporter: github-pr-annotations
           tool_name: "Review / alex"
