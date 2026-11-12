@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TOKEN: ${{ secrets.HOLOCRON_TURBO_TOKEN || secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.HOLOCRON_TURBO_TEAM || vars.TURBO_TEAM }}
     steps:
       # actions/create-github-app-token defaults to scoping its token to the
@@ -60,8 +60,8 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
-          app-id: ${{ secrets.SENTINEL_APP_ID }}
-          private-key: ${{ secrets.SENTINEL_APP_PRIVATE_KEY }}
+          app-id: ${{ vars.SENTINEL_GITHUB_APP_ID || secrets.SENTINEL_GITHUB_APP_ID || secrets.SENTINEL_APP_ID }}
+          private-key: ${{ secrets.SENTINEL_GITHUB_APP_PRIVATE_KEY || secrets.SENTINEL_APP_PRIVATE_KEY }}
           owner: ${{ steps.target.outputs.owner }}
           repositories: ${{ steps.target.outputs.name }}
 
@@ -141,7 +141,7 @@ jobs:
           JOB_ID: ${{ steps.job-info.outputs.job_id }}
           CHECK_RUN_ID: ${{ inputs.check-run-id }}
           CONCLUSION: ${{ steps.run-task.outcome == 'success' && 'success' || 'failure' }}
-          # Org variables (1Password Environment "Holocron - GitHub Actions variables", synced by
+          # Org variables (1Password Environment `theholocron/holocron - ci`, synced by
           # `repo.variables.sync`); no literal fallback. The variable keeps its bare name in GitHub and
           # 1Password; the workflow maps it onto the prefixed one (#1864).
           HOLOCRON_AXIOM_ORG: ${{ vars.HOLOCRON_AXIOM_ORG || vars.AXIOM_ORG }}
