@@ -4,6 +4,8 @@
 # Changes: edit source in theholocron/holocron
 name: Sentinel Deploy
 
+run-name: "${{ github.event_name == 'workflow_dispatch' && 'Deploy Sentinel (manual)' || 'Deploy Sentinel' }}"
+
 on: # yamllint disable-line rule:truthy
   push:
     branches: [main]

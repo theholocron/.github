@@ -4,6 +4,8 @@
 # Changes: edit source in theholocron/holocron
 name: Doctor Tokens
 
+run-name: "${{ github.event_name == 'workflow_dispatch' && 'Doctor Tokens (manual)' || github.event_name == 'schedule' && 'Doctor Tokens (scheduled)' || 'Doctor Tokens' }}"
+
 on: # yamllint disable-line rule:truthy
   schedule:
     - cron: "41 6 * * *"

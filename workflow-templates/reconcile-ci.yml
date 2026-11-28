@@ -1,0 +1,21 @@
+# AUTO-GENERATED — do not edit in theholocron/.github directly.
+# Source:  theholocron/holocron · cli/astromech/src/generators/github-action-reusable-workflows/github-action-reusable-workflows.ts
+# Tool:    holocron sync github
+# Changes: edit source in theholocron/holocron
+name: Reconcile ci
+
+run-name: "${{ github.event_name == 'workflow_dispatch' && 'Reconcile CI (manual)' || github.event_name == 'schedule' && 'Reconcile CI (scheduled)' || 'Reconcile CI' }}"
+
+on: # yamllint disable-line rule:truthy
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  reconcile-ci:
+    name: Reconcile ci
+    uses: theholocron/.github/.github/workflows/reconcile-ci.yml@main
+    secrets: inherit

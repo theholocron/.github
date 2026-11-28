@@ -4,6 +4,8 @@
 # Changes: edit source in theholocron/holocron
 name: Security
 
+run-name: "${{ github.event_name == 'schedule' && 'Scan Code (scheduled)' || (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && format('Scan Code: {0}', github.event.pull_request.title) || 'Scan Code' }}"
+
 on: # yamllint disable-line rule:truthy
   push:
     branches:

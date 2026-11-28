@@ -4,6 +4,8 @@
 # Changes: edit source in theholocron/holocron
 name: Platform
 
+run-name: "${{ (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && format('Validate Specs: {0}', github.event.pull_request.title) || 'Validate Specs' }}"
+
 on: # yamllint disable-line rule:truthy
   push:
     branches: [main, alpha]

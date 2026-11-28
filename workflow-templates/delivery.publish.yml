@@ -4,6 +4,8 @@
 # Changes: edit source in theholocron/holocron
 name: Delivery
 
+run-name: "${{ github.event_name == 'workflow_dispatch' && 'Release (manual)' || 'Release' }}"
+
 on: # yamllint disable-line rule:truthy
   push:
     branches:
