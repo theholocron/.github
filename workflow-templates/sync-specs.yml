@@ -4,6 +4,8 @@
 # Changes: edit source in theholocron/holocron
 name: Spec discussions
 
+run-name: "${{ github.event_name == 'workflow_dispatch' && 'Sync Specs (manual)' || github.event_name == 'schedule' && 'Sync Specs (scheduled)' || 'Sync Specs' }}"
+
 on: # yamllint disable-line rule:truthy
   schedule:
     - cron: "17 * * * *"

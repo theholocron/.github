@@ -4,6 +4,8 @@
 # Changes: edit source in theholocron/holocron
 name: Delivery
 
+run-name: Check Preview
+
 on: # yamllint disable-line rule:truthy
   deployment_status:
 

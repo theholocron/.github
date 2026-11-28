@@ -4,6 +4,8 @@
 # Changes: edit source in theholocron/holocron
 name: Source Quality
 
+run-name: "${{ (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && format('Lint Editorconfig: {0}', github.event.pull_request.title) || 'Lint Editorconfig' }}"
+
 on: # yamllint disable-line rule:truthy
   push:
     branches: [main, alpha]

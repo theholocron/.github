@@ -4,6 +4,8 @@
 # Changes: edit source in theholocron/holocron
 name: Stale
 
+run-name: "${{ github.event_name == 'schedule' && 'Mark Stale (scheduled)' || 'Mark Stale' }}"
+
 on: # yamllint disable-line rule:truthy
   schedule:
     - cron: "30 1 * * *"

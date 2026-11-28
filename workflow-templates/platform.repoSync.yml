@@ -4,6 +4,8 @@
 # Changes: edit source in theholocron/holocron
 name: Platform
 
+run-name: "${{ github.event_name == 'workflow_dispatch' && 'Sync Repo (manual)' || 'Sync Repo' }}"
+
 on: # yamllint disable-line rule:truthy
   push:
     branches: [main]
